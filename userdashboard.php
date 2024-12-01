@@ -98,7 +98,7 @@ include "inc/koneksi.php";
 					<li class="header">MAIN NAVIGATION</li>
 					<!-- Level  -->
 						<li class="treeview">
-							<a href="?page=dashboard">
+							<a href="?page=katalog">
 								<i class="glyphicon glyphicon-book"></i>
 								<span>Katalog Buku</span>
 								<span class="pull-right-container">
@@ -166,10 +166,16 @@ include "inc/koneksi.php";
 						case 'petugas':
 							include "home/petugas.php";
 							break;
-                        case 'petugas':
-                            include "home/petugas.php";
+                        
+                        case 'katalog':
+                            include "pengguna/kataloguser.php";
                             break;
                         
+                        case 'reservasiuser':
+                            include "pengguna/reservasi/data_reservasi.php";
+                            break;
+                        
+
                         case 'login':
                             header("location: login.php");
                             break;
