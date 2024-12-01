@@ -1,14 +1,14 @@
 <?php
 //Mulai Sesion
-session_start();
-if (isset($_SESSION["ses_username"]) == "") {
-	header("location: login.php");
-} else {
-	$data_id = $_SESSION["ses_id"];
-	$data_nama = $_SESSION["ses_nama"];
-	$data_user = $_SESSION["ses_username"];
-	$data_level = $_SESSION["ses_level"];
-}
+// session_start();
+// if (isset($_SESSION["ses_username"]) == "") {
+// 	header("location: login.php");
+// } else {
+// 	$data_id = $_SESSION["ses_id"];
+// 	$data_nama = $_SESSION["ses_nama"];
+// 	$data_user = $_SESSION["ses_username"];
+// 	$data_level = $_SESSION["ses_level"];
+// }
 
 //KONEKSI DB
 include "inc/koneksi.php";
@@ -90,33 +90,16 @@ include "inc/koneksi.php";
 			<section class="sidebar">
 				<!-- Sidebar user panel -->
 				</<b>
-				<div class="user-panel">
-					<div class="pull-left image">
-						<img src="dist/img/avatar.png" class="img-circle" alt="User Image">
-					</div>
-					<div class="pull-left info">
-						<p>
-							<?php echo $data_nama; ?>
-						</p>
-						<span class="label label-warning">
-							<?php echo $data_level; ?>
-						</span>
-					</div>
-				</div>
+				
 				</br>
 				<!-- /.search form -->
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu">
 					<li class="header">MAIN NAVIGATION</li>
-
 					<!-- Level  -->
-					<?php
-					if ($data_level == "Administrator") {
-					?>
-
 						<li class="treeview">
-							<a href="?page=admin">
-								<i class="fa fa-dashboard"></i>
+							<a href="?page=dashboard">
+								<i class="glyphicon glyphicon-book"></i>
 								<span>Dashboard</span>
 								<span class="pull-right-container">
 								</span>
@@ -125,8 +108,8 @@ include "inc/koneksi.php";
 
 						<li class="treeview">
 							<a href="#">
-								<i class="fa fa-folder"></i>
-								<span>Kelola Data</span>
+								<i class="glyphicon glyphicon-menu-hamburger"></i>
+								<span>Buat Reservasi</span>
 								<span class="pull-right-container">
 									<i class="fa fa-angle-left pull-right"></i>
 								</span>
@@ -134,173 +117,15 @@ include "inc/koneksi.php";
 							<ul class="treeview-menu">
 
 								<li>
-									<a href="?page=MyApp/data_buku">
-										<i class="fa fa-book"></i>Data Buku</a>
+									<a href="?page=signin">
+										<i class="glyphicon glyphicon-user"></i>Sign-in</a>
 								</li>
 								<li>
-									<a href="?page=MyApp/data_agt">
-										<i class="fa fa-users"></i>Data Anggota</a>
+									<a href="?page=login">
+										<i class="glyphicon glyphicon-log-in"></i>Log-in</a>
 								</li>
 							</ul>
 						</li>
-
-						<li class="treeview">
-							<a href="?page=data_sirkul">
-								<i class="fa fa-refresh"></i>
-								<span>Sirkulasi</span>
-								<span class="pull-right-container">
-								</span>
-							</a>
-						</li>
-
-						<li class="treeview">
-							<a href="#">
-								<i class="fa fa-book"></i>
-								<span>Log Data</span>
-								<span class="pull-right-container">
-									<i class="fa fa-angle-left pull-right"></i>
-								</span>
-							</a>
-							<ul class="treeview-menu">
-
-								<li>
-									<a href="?page=log_pinjam">
-										<i class="fa fa-arrow-circle-o-down"></i>Peminjaman</a>
-								</li>
-								<li>
-									<a href="?page=log_kembali">
-										<i class="fa fa-arrow-circle-o-up"></i>Pengembalian</a>
-								</li>
-							</ul>
-						</li>
-
-
-						<li class="treeview">
-							<a href="#">
-								<i class="fa fa-print"></i>
-								<span>Laporan</span>
-								<span class="pull-right-container">
-									<i class="fa fa-angle-left pull-right"></i>
-								</span>
-							</a>
-							<ul class="treeview-menu">
-								<li>
-									<a href="?page=laporan_sirkulasi">
-										<i class="fa fa-file"></i>Laporan Sirkulasi</a>
-								</li>
-							</ul>
-						</li>
-
-
-
-
-						<li class="header">SETTING</li>
-
-						<li class="treeview">
-							<a href="?page=MyApp/data_pengguna">
-								<i class="fa fa-user"></i>
-								<span>Pengguna Sistem</span>
-								<span class="pull-right-container">
-								</span>
-							</a>
-						</li>
-
-					<?php
-					} elseif ($data_level == "Petugas") {
-					?>
-
-						<li class="treeview">
-							<a href="?page=petugas">
-								<i class="fa fa-dashboard"></i>
-								<span>Dashboard</span>
-								<span class="pull-right-container">
-								</span>
-							</a>
-						</li>
-
-						<li class="treeview">
-							<a href="#">
-								<i class="fa fa-folder"></i>
-								<span>Kelola Data</span>
-								<span class="pull-right-container">
-									<i class="fa fa-angle-left pull-right"></i>
-								</span>
-							</a>
-							<ul class="treeview-menu">
-
-								<li>
-									<a href="?page=MyApp/data_buku">
-										<i class="fa fa-book"></i>Data Buku</a>
-								</li>
-								<li>
-									<a href="?page=MyApp/data_agt">
-										<i class="fa fa-users"></i>Data Anggota</a>
-								</li>
-							</ul>
-						</li>
-
-						<li class="treeview">
-							<a href="?page=data_sirkul">
-								<i class="fa fa-refresh"></i>
-								<span>Sirkulasi</span>
-								<span class="pull-right-container">
-								</span>
-							</a>
-						</li>
-
-						<li class="treeview">
-							<a href="#">
-								<i class="fa fa-book"></i>
-								<span>Log Data</span>
-								<span class="pull-right-container">
-									<i class="fa fa-angle-left pull-right"></i>
-								</span>
-							</a>
-							<ul class="treeview-menu">
-
-								<li>
-									<a href="?page=log_pinjam">
-										<i class="fa fa-arrow-circle-o-down"></i>Peminjaman</a>
-								</li>
-								<li>
-									<a href="?page=log_kembali">
-										<i class="fa fa-arrow-circle-o-up"></i>Pengembalian</a>
-								</li>
-							</ul>
-						</li>
-
-						<li class="treeview">
-							<a href="#">
-								<i class="fa fa-print"></i>
-								<span>Laporan</span>
-								<span class="pull-right-container">
-									<i class="fa fa-angle-left pull-right"></i>
-								</span>
-							</a>
-							<ul class="treeview-menu">
-
-
-								<li>
-									<a href="?page=laporan_sirkulasi">
-										<i class="fa fa-file"></i>Laporan Sirkulasi</a>
-								</li>
-							</ul>
-						</li>
-
-						<li class="header">SETTING</li>
-
-					<?php
-					}
-					?>
-
-					<li>
-						<a href="logout.php" onclick="return confirm('Anda yakin keluar dari aplikasi ?')">
-							<i class="fa fa-sign-out"></i>
-							<span>Logout</span>
-							<span class="pull-right-container"></span>
-						</a>
-					</li>
-
 
 			</section>
 			<!-- /.sidebar -->
@@ -316,7 +141,7 @@ include "inc/koneksi.php";
 				<?php
 				if (isset($_GET['page'])) {
 					$hal = $_GET['page'];
-
+                    
 					switch ($hal) {
 							//Klik Halaman Home Pengguna
 						case 'admin':
@@ -325,6 +150,13 @@ include "inc/koneksi.php";
 						case 'petugas':
 							include "home/petugas.php";
 							break;
+                        
+                        case 'login':
+                            header("location: login.php");
+                            break;
+                        case 'signin':
+                            header("location: daftar.php");
+                            break;
 
 							//Pengguna
 						case 'MyApp/data_pengguna':
@@ -339,7 +171,9 @@ include "inc/koneksi.php";
 						case 'MyApp/del_pengguna':
 							include "admin/pengguna/del_pengguna.php";
 							break;
-
+                        case 'dashboard':
+                            include "home/indexkatalog.php";
+                            break;
 
 							//agt
 						case 'MyApp/data_agt':
@@ -360,7 +194,6 @@ include "inc/koneksi.php";
 						case 'MyApp/print_allagt':
 							include "admin/agt/print_allagt.php";
 							break;
-
 
 							//buku
 						case 'MyApp/data_buku':
@@ -406,20 +239,11 @@ include "inc/koneksi.php";
 							include "admin/laporan/print_laporan.php";
 							break;
 
-
-
 							//default
 						default:
 							echo "<center><br><br><br><br><br><br><br><br><br>
 				  <h1> Halaman tidak ditemukan !</h1></center>";
 							break;
-					}
-				} else {
-					// Auto Halaman Home Pengguna
-					if ($data_level == "Administrator") {
-						include "home/admin.php";
-					} elseif ($data_level == "Petugas") {
-						include "home/petugas.php";
 					}
 				}
 				?>
