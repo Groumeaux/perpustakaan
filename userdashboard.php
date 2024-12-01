@@ -1,15 +1,14 @@
 <?php
 //Mulai Sesion
-// session_start();
-// if (isset($_SESSION["ses_username"]) == "") {
-// 	header("location: login.php");
-// } else {
-// 	$data_id = $_SESSION["ses_id"];
-// 	$data_nama = $_SESSION["ses_nama"];
-// 	$data_user = $_SESSION["ses_username"];
-// 	$data_level = $_SESSION["ses_level"];
-// }
-
+session_start();
+if (isset($_SESSION["ses_username"]) == "") {
+	header("location: index.php");
+} else {
+	$data_id = $_SESSION["ses_id"];
+	$data_nama = $_SESSION["ses_nama"];
+	$data_user = $_SESSION["ses_username"];
+	$data_level = $_SESSION["ses_level"];
+}
 //KONEKSI DB
 include "inc/koneksi.php";
 ?>
@@ -142,6 +141,14 @@ include "inc/koneksi.php";
 								</span>
 							</a>
 						</li>
+                        <li class="treeview">
+							<a href="logout.php">
+								<i class="glyphicon glyphicon-log-out"></i>
+								<span>Logout</span>
+								<span class="pull-right-container">
+								</span>
+							</a>
+						</li>
 
 			</section>
 			<!-- /.sidebar -->
@@ -175,6 +182,10 @@ include "inc/koneksi.php";
                             include "pengguna/reservasi/data_reservasi.php";
                             break;
                         
+                        case 'logout':
+                            session_destroy();
+                            header("location: logout.php");
+                            break;
 
                         case 'login':
                             header("location: login.php");
@@ -266,11 +277,16 @@ include "inc/koneksi.php";
 
 							//default
 						default:
-							echo "<center><br><br><br><br><br><br><br><br><br>
-				  <h1> Halaman tidak ditemukan !</h1></center>";
+							echo "<center><br><br><br><br><br><br><br><br><br><h1> Halaman tidak ditemukan !</h1></center>";
 							break;
 					}
-				}
+				}else{
+                    if ($data_level == "Administrator") {
+						include "home/admin.php";
+					} elseif ($data_level == "Pengguna") {
+						include "pengguna/kataloguser.php";
+					}
+                }
 				?>
 
 

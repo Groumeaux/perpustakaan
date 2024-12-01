@@ -1,14 +1,11 @@
 <?php
-//Mulai Sesion
-// session_start();
-// if (isset($_SESSION["ses_username"]) == "") {
-// 	header("location: login.php");
-// } else {
-// 	$data_id = $_SESSION["ses_id"];
-// 	$data_nama = $_SESSION["ses_nama"];
-// 	$data_user = $_SESSION["ses_username"];
-// 	$data_level = $_SESSION["ses_level"];
-// }
+// Mulai Sesion
+session_start();
+if (isset($_SESSION["ses_level"]) == "Pengguna") {
+	header("location: userdashboard.php");
+} else {
+	session_destroy();
+}
 
 //KONEKSI DB
 include "inc/koneksi.php";
@@ -109,7 +106,7 @@ include "inc/koneksi.php";
 						<li class="treeview">
 							<a href="#">
 								<i class="glyphicon glyphicon-menu-hamburger"></i>
-								<span>Buat Reservasi</span>
+								<span>Ingin Buat Reservasi?</span>
 								<span class="pull-right-container">
 									<i class="fa fa-angle-left pull-right"></i>
 								</span>
@@ -118,11 +115,11 @@ include "inc/koneksi.php";
 
 								<li>
 									<a href="?page=signin">
-										<i class="glyphicon glyphicon-user"></i>Sign-in</a>
+										<i class="glyphicon glyphicon-user"></i>Daftar</a>
 								</li>
 								<li>
 									<a href="?page=login">
-										<i class="glyphicon glyphicon-log-in"></i>Log-in</a>
+										<i class="glyphicon glyphicon-log-in"></i>Masuk akun</a>
 								</li>
 							</ul>
 						</li>
@@ -150,7 +147,7 @@ include "inc/koneksi.php";
 						case 'petugas':
 							include "home/petugas.php";
 							break;
-                        
+
                         case 'login':
                             header("location: login.php");
                             break;
@@ -245,6 +242,8 @@ include "inc/koneksi.php";
 				  <h1> Halaman tidak ditemukan !</h1></center>";
 							break;
 					}
+				}else{
+					include "home/indexkatalog.php";
 				}
 				?>
 

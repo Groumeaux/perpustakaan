@@ -1,7 +1,7 @@
 <section class="content-header">
 	<h1>
-		Sirkulasi
-		<small>Buku</small>
+		Reservasi
+		<small>Saya</small>
 	</h1>
 	<ol class="breadcrumb">
 		<li>
@@ -26,98 +26,76 @@
 					<thead>
 						<tr>
 							<th>No</th>
-							<th>ID SKL</th>
+							<th>ID Reservasi</th>
 							<th>Buku</th>
-							<th>Peminjam</th>
 							<th>Tgl Pinjam</th>
-							<th>Jatuh Tempo</th>
-							<th>Denda</th>
-							<th>Kelola</th>
+							<th>Actions</th>
+                            <th>Status</th>
 						</tr>
 					</thead>
 					<tbody>
-
 						<?php
 						$no = 1;
-						$sql = $koneksi->query("SELECT s.id_sk, b.judul_buku,
-				  a.id_anggota,
-				  a.nama,
-				  s.tgl_pinjam, 
-				  s.tgl_kembali
-                  from tb_sirkulasi s inner join tb_buku b on s.id_buku=b.id_buku
-				  inner join tb_anggota a on s.id_anggota=a.id_anggota where status='PIN' order by tgl_pinjam desc");
+						$sql = $koneksi->query("SELECT 
+                        s.id_reservasi, 
+                        b.judul_buku,
+                        s.tanggal_reservasi,
+                        s.status
+                        from tb_reservasi s inner join tb_buku b on s.id_buku=b.id_buku order by tanggal_reservasi desc");
 						while ($data = $sql->fetch_assoc()) {
 						?>
-
 							<tr>
 								<td>
 									<?php echo $no++; ?>
 								</td>
 								<td>
-									<?php echo $data['id_sk']; ?>
+									<?php echo $data['id_reservasi']; ?>
 								</td>
 								<td>
 									<?php echo $data['judul_buku']; ?>
 								</td>
 								<td>
-									<?php echo $data['id_anggota']; ?>
-									-
-									<?php echo $data['nama']; ?>
-								</td>
-								<td>
-									<?php $tgl = $data['tgl_pinjam'];
+									<?php $tgl = $data['tanggal_reservasi'];
 									echo date("d/M/Y", strtotime($tgl)) ?>
 								</td>
-								<td>
-									<?php $tgl = $data['tgl_kembali'];
-									echo date("d/M/Y", strtotime($tgl)) ?>
+                                <td>
+                                    <?php 
+                                        if ($data['status'] == "Diterima"){    
+                                    ?>
+                                    -
+                                    <?php
+                                        }else {
+                                    ?>
+                                    <!-- Dropdown Button -->
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle" type="button" id="actionMenu" data-toggle="dropdown" aria-expanded="false">
+                                            Action <span class="caret"></span>
+                                        </button>
+                                        <!-- Dropdown Menu -->
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="actionMenu">
+                                            <li>
+                                                <a href="?page=panjang&kode=<?php echo $data['id_reservasi']; ?>" 
+                                                onclick="return confirm('Perpanjang Data Ini ?')" 
+                                                title="Perpanjang">
+                                                    <i class="glyphicon glyphicon-upload"></i> Perpanjang
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="?page=kembali&kode=<?php echo $data['id_reservasi']; ?>" 
+                                                onclick="return confirm('Kembalikan Buku Ini ?')" 
+                                                title="Kembalikan">
+                                                    <i class="glyphicon glyphicon-download"></i> Kembalikan
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <?php
+                                        }
+                                    ?>
+                                </td>
+                                <td>
+									<?php echo $data['status']; ?>
 								</td>
-
-								<?php
-
-								$u_denda = 1000;
-
-								$tgl1 = date("Y-m-d");
-								$tgl2 = $data['tgl_kembali'];
-
-								$pecah1 = explode("-", $tgl1);
-								$date1 = $pecah1[2];
-								$month1 = $pecah1[1];
-								$year1 = $pecah1[0];
-
-								$pecah2 = explode("-", $tgl2);
-								$date2 = $pecah2[2];
-								$month2 = $pecah2[1];
-								$year2 =  $pecah2[0];
-
-								$jd1 = GregorianToJD($month1, $date1, $year1);
-								$jd2 = GregorianToJD($month2, $date2, $year2);
-
-								$selisih = $jd1 - $jd2;
-								$denda = $selisih * $u_denda;
-								?>
-
-								<td>
-									<?php if ($selisih <= 0) { ?>
-										<span class="label label-primary">Masa Peminjaman</span>
-									<?php } elseif ($selisih > 0) { ?>
-										<span class="label label-danger">
-											Rp.
-											<?= $denda ?>
-										</span>
-										<br> Terlambat :
-										<?= $selisih ?>
-										Hari
-								</td>
-							<?php } ?>
-
-							<td>
-								<a href="?page=panjang&kode=<?php echo $data['id_sk']; ?>" onclick="return confirm('Perpanjang Data Ini ?')" title="Perpanjang" class="btn btn-success">
-									<i class="glyphicon glyphicon-upload"></i>
-								</a>
-								<a href="?page=kembali&kode=<?php echo $data['id_sk']; ?>" onclick="return confirm('Kembalikan Buku Ini ?')" title="Kembalikan" class="btn btn-danger">
-									<i class="glyphicon glyphicon-download"></i>
-							</td>
 							</tr>
 						<?php
 						}
@@ -128,9 +106,4 @@
 			</div>
 		</div>
 	</div>
-	<h4> *Note
-		<br> Masa peminjaman buku adalah <span style="color:red; font-weight:bold;">7 hari</span> dari tanggal peminjaman.
-		<br> Jika buku dikembalikan lebih dari masa peminjaman, maka akan dikenakan <span style="color:red; font-weight:bold;">denda</span>
-		<br> sebesar <span style="color:red; font-weight:bold;">Rp 1.000/hari</span>.
-	</h4>
 </section>

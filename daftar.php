@@ -104,14 +104,14 @@ include "inc/koneksi.php";
 
         // Simpan password ke tabel pengguna
         $sql_user = "INSERT INTO tb_pengguna (id_pengguna, nama_pengguna, username, password, level)
-                     VALUES (NULL, '$username', '$id_baru', '$password', 'Peminjam')";
+                     VALUES (NULL, '$username', '$username', '$password', 'Pengguna')";
         $query_user = mysqli_query($koneksi, $sql_user);
 
         if ($query_register && $query_user) {
-            echo "<script>
+            echo "<script>  
                 Swal.fire({
                     title: 'Pendaftaran Berhasil!',
-                    text: 'ID Anda adalah $id_baru. Silakan login menggunakan ID dan password Anda.',
+                    text: 'Username Anda adalah $username. Silakan login menggunakan ID dan password Anda.',
                     icon: 'success',
                     confirmButtonText: 'OK'
                 }).then((result) => {

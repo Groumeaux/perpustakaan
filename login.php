@@ -1,8 +1,6 @@
 <?php
-include "inc/koneksi.php";
-   
+include "inc/koneksi.php"; 
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -123,18 +121,14 @@ include "inc/koneksi.php";
 
 		if (isset($_POST['btnLogin'])) {  
 		
-		
-
 			$username=mysqli_real_escape_string($koneksi,$_POST['username']);
 			$password=mysqli_real_escape_string($koneksi,md5($_POST['password']));
 
-
-		$sql_login = "SELECT * FROM tb_pengguna WHERE BINARY username='$username' AND password= '$password'";
-		$query_login = mysqli_query($koneksi, $sql_login);
-		$data_login = mysqli_fetch_array($query_login,MYSQLI_BOTH);
-		$jumlah_login = mysqli_num_rows($query_login);
+			$sql_login = "SELECT * FROM tb_pengguna WHERE BINARY username='$username' AND password= '$password'";
+			$query_login = mysqli_query($koneksi, $sql_login);
+			$data_login = mysqli_fetch_array($query_login,MYSQLI_BOTH);
+			$jumlah_login = mysqli_num_rows($query_login);
         
-
             if ($jumlah_login == 1 ){
               session_start();
               $_SESSION["ses_id"]=$data_login["id_pengguna"];
@@ -142,7 +136,7 @@ include "inc/koneksi.php";
               $_SESSION["ses_username"]=$data_login["username"];
               $_SESSION["ses_password"]=$data_login["password"];
               $_SESSION["ses_level"]=$data_login["level"];
-                
+				
               echo "<script>
                     Swal.fire({title: 'Login Berhasil',
 						text: '',

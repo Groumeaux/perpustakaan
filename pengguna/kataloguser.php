@@ -25,7 +25,7 @@
             <!-- Card 1 -->
             <div class="col-md-3 col-sm-6">
                 <div class="panel panel-default" style="position: relative;">
-                    <button class="btn btn-success" style="position: absolute; top: 5px; right: 5px; z-index: 10;" onclick="confirmAction('Book 2')">Button</button>
+                    <button class="btn btn-success" style="position: absolute; top: 5px; right: 5px; z-index: 10;" onclick="confirmAction('<?php echo $data['id_buku'] ?>')">Button</button>
                     <div class="panel-heading" style="padding: 0; height: 280px; overflow: hidden;">
                         <img src="https://placehold.co/1000x800" alt="Book Cover 1" class="img-responsive" style="width: 100%; height: 100%;">
                     </div>
@@ -43,12 +43,12 @@
     </div>
 
     <script>
-        function confirmAction(bookName) {
-            var confirmation = confirm("Are you sure you want to perform this action on " + bookName + "?");
+        function confirmAction(idbuku) {
+            var confirmation = confirm("Apakah anda yakin ingin mereservasi buku " + idbuku + "?");
             if (confirmation) {
-                alert("Action confirmed for " + bookName);
+                window.location.href = "pengguna/reservasi/add_reservasi.php?book=" + encodeURIComponent(idbuku);
             } else {
-                alert("Action canceled.");
+                alert("Reservasi dibatalkan.");
             }
         }
     </script>
