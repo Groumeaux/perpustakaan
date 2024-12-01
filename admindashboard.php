@@ -1,19 +1,14 @@
 <?php
-// Mulai Sesion
+//Mulai Sesion
 session_start();
-if (isset($_SESSION["ses_level"]) && $_SESSION["ses_level"] == "Administrator") {
-    header("location: admindashboard.php");
-    exit; // Always exit after a header() redirection
-} elseif (isset($_SESSION["ses_level"]) && $_SESSION["ses_level"] == "Pengguna") {
-    header("location: userdashboard.php");
-    exit;
+if (isset($_SESSION["ses_username"]) == "") {
+	header("location: index.php");
 } else {
-    session_destroy();
-    header("location: login.php"); // Redirect to a login page or other appropriate page
-    exit;
+	$data_id = $_SESSION["ses_id"];
+	$data_nama = $_SESSION["ses_nama"];
+	$data_user = $_SESSION["ses_username"];
+	$data_level = $_SESSION["ses_level"];
 }
-
-
 //KONEKSI DB
 include "inc/koneksi.php";
 ?>
@@ -93,7 +88,7 @@ include "inc/koneksi.php";
 			<!-- sidebar: style can be found in sidebar.less -->
 			<section class="sidebar">
 				<!-- Sidebar user panel -->
-				</<b>
+				</b>
 				
 				</br>
 				<!-- /.search form -->
@@ -102,18 +97,34 @@ include "inc/koneksi.php";
 					<li class="header">MAIN NAVIGATION</li>
 					<!-- Level  -->
 						<li class="treeview">
-							<a href="?page=dashboard">
+							<a href="?page=MyApp/data_buku">
 								<i class="glyphicon glyphicon-book"></i>
-								<span>Dashboard</span>
+								<span>Katalog Buku</span>
 								<span class="pull-right-container">
 								</span>
 							</a>
 						</li>
 
-						<li class="treeview">
+                        <li class="treeview">
+							<a href="?page=MyApp/datareservasi">
+								<i class="glyphicon glyphicon-list-alt"></i>
+								<span>Daftar Reservasi</span>
+								<span class="pull-right-container">
+								</span>
+							</a>
+						</li>
+                        <li class="treeview">
+							<a href="?page=MyApp/data_agt">
+								<i class="glyphicon glyphicon-list-alt"></i>
+								<span>Daftar Anggota</span>
+								<span class="pull-right-container">
+								</span>
+							</a>
+						</li>
+						<!-- <li class="treeview">
 							<a href="#">
 								<i class="glyphicon glyphicon-menu-hamburger"></i>
-								<span>Ingin Buat Reservasi?</span>
+								<span>Daftar Reservasi</span>
 								<span class="pull-right-container">
 									<i class="fa fa-angle-left pull-right"></i>
 								</span>
@@ -122,13 +133,29 @@ include "inc/koneksi.php";
 
 								<li>
 									<a href="?page=signin">
-										<i class="glyphicon glyphicon-user"></i>Daftar</a>
+										<i class="glyphicon glyphicon-user"></i>Sign-in</a>
 								</li>
 								<li>
 									<a href="?page=login">
-										<i class="glyphicon glyphicon-log-in"></i>Masuk akun</a>
+										<i class="glyphicon glyphicon-log-in"></i>Log-in</a>
 								</li>
 							</ul>
+						</li> -->
+                        <li class="treeview">
+							<a href="?page=data_sirkul">
+								<i class="glyphicon glyphicon-user"></i>
+								<span>Akun Anda</span>
+								<span class="pull-right-container">
+								</span>
+							</a>
+						</li>
+                        <li class="treeview">
+							<a href="logout.php">
+								<i class="glyphicon glyphicon-log-out"></i>
+								<span>Logout</span>
+								<span class="pull-right-container">
+								</span>
+							</a>
 						</li>
 
 			</section>
@@ -154,6 +181,19 @@ include "inc/koneksi.php";
 						case 'petugas':
 							include "home/petugas.php";
 							break;
+                        
+                        case 'katalog':
+                            include "pengguna/kataloguser.php";
+                            break;
+                        
+                        case 'reservasiuser':
+                            include "pengguna/reservasi/data_reservasi.php";
+                            break;
+                        
+                        case 'logout':
+                            session_destroy();
+                            header("location: logout.php");
+                            break;
 
                         case 'login':
                             header("location: login.php");
@@ -177,6 +217,10 @@ include "inc/koneksi.php";
 							break;
                         case 'dashboard':
                             include "home/indexkatalog.php";
+                            break;
+
+                        case 'MyApp/datareservasi':
+                            include "admin/reservasi/data_reservasi.php";
                             break;
 
 							//agt
@@ -245,13 +289,16 @@ include "inc/koneksi.php";
 
 							//default
 						default:
-							echo "<center><br><br><br><br><br><br><br><br><br>
-				  <h1> Halaman tidak ditemukan !</h1></center>";
+							echo "<center><br><br><br><br><br><br><br><br><br><h1> Halaman tidak ditemukan !</h1></center>";
 							break;
 					}
 				}else{
-					include "home/indexkatalog.php";
-				}
+                    if ($data_level == "Administrator") {
+						include "home/admin.php";
+					} elseif ($data_level == "Pengguna") {
+						include "pengguna/kataloguser.php";
+					}
+                }
 				?>
 
 

@@ -15,10 +15,6 @@
 <!-- Main content -->
 <section class="content">
 	<div class="box box-primary">
-		<div class="box-header with-border">
-			<a href="?page=add_sirkul" title="Tambah Data" class="btn btn-primary">
-				<i class="glyphicon glyphicon-plus"></i> Tambah Data</a>
-		</div>
 		<!-- /.box-header -->
 		<div class="box-body">
 			<div class="table-responsive">
@@ -35,13 +31,17 @@
 					</thead>
 					<tbody>
 						<?php
+						$queryanggota = mysqli_query($koneksi, "SELECT * FROM tb_anggota WHERE nama='$data_nama'");
+						$takeanggota = mysqli_fetch_assoc($queryanggota);
+						$idanggota = $takeanggota['id_anggota'];
+
 						$no = 1;
 						$sql = $koneksi->query("SELECT 
                         s.id_reservasi, 
                         b.judul_buku,
                         s.tanggal_reservasi,
                         s.status
-                        from tb_reservasi s inner join tb_buku b on s.id_buku=b.id_buku order by tanggal_reservasi desc");
+                        from tb_reservasi s inner join tb_buku b on s.id_buku=b.id_buku WHERE s.id_anggota = '$idanggota' order by tanggal_reservasi desc");
 						while ($data = $sql->fetch_assoc()) {
 						?>
 							<tr>
@@ -60,11 +60,11 @@
 								</td>
                                 <td>
                                     <?php 
-                                        if ($data['status'] == "Diterima"){    
+                                        if ($data['status'] == "Diterima" || "Ditolak"){    
                                     ?>
                                     -
                                     <?php
-                                        }else {
+                                        }elseif (($data['status'] == "Pending")) {
                                     ?>
                                     <!-- Dropdown Button -->
                                     <div class="dropdown">

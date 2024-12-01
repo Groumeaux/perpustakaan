@@ -4,6 +4,9 @@
 	
 		$buku=$data['buku'];
 	}
+    if (isset($_GET['msg']) == "reservasisukses"){
+        echo "<script> alert('Reservasi Berhasil!')</script>";
+    }
 ?>
 
 <!-- Content Header (Page header) -->

@@ -101,10 +101,10 @@ include "inc/koneksi.php";
         $sql_register = "INSERT INTO tb_anggota (id_anggota, nama, jekel, kelas, no_hp) 
                          VALUES ('$id_baru', '$nama', '$jekel', '$domisili', '$no_hp')";
         $query_register = mysqli_query($koneksi, $sql_register);
-
+    
         // Simpan password ke tabel pengguna
         $sql_user = "INSERT INTO tb_pengguna (id_pengguna, nama_pengguna, username, password, level)
-                     VALUES (NULL, '$username', '$username', '$password', 'Pengguna')";
+                     VALUES (NULL, '$nama', '$username', '$password', 'Pengguna')";
         $query_user = mysqli_query($koneksi, $sql_user);
 
         if ($query_register && $query_user) {
