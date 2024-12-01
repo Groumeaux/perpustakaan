@@ -141,6 +141,11 @@ include "inc/koneksi.php";
 									<a href="?page=MyApp/data_agt">
 										<i class="fa fa-users"></i>Data Anggota</a>
 								</li>
+								<li>
+									<a href="?page=MyApp/data_reservasi.php">
+									<i class="fa fa-calendar"></i>Data Reservasi
+								</a>
+							</li>
 							</ul>
 						</li>
 
@@ -406,7 +411,10 @@ include "inc/koneksi.php";
 							include "admin/laporan/print_laporan.php";
 							break;
 
-
+							//reservasi
+						case 'MyApp/data_reservasi.php':
+							include "admin/reservasi/data_reservasi.php";
+							break;
 
 							//default
 						default:

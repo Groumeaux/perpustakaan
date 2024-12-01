@@ -57,6 +57,9 @@ include "inc/koneksi.php";
 					<input type="password" class="form-control" name="password" placeholder="Password" required>
 					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div>
+				<div class="form-group has-feedback">
+                    <p>Belum mempunyai akun Anggota? <a href="daftar.php">Daftar Disini!</a></p>
+                </div>
 				<div class="row">
 					<div class="col-xs-8">
 
@@ -71,15 +74,6 @@ include "inc/koneksi.php";
 					<!-- /.col -->
 				</div>
 			</form>
-
-			<!-- Tombol Pendaftaran Anggota -->
-				<div class="row">
-					<div class="col-xs-7">
-						<a href="daftar.php" class="btn btn-success btn-block btn-flat">
-							<b>Pendaftaran Anggota</b>
-						</a>
-					</div>
-				</div>
 
 			<!-- /.social-auth-links -->
 
