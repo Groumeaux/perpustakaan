@@ -58,31 +58,20 @@ include "inc/koneksi.php";
 					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div>
 				<div class="row">
-					<div class="col-xs-8">
-
-					</div>
-					<!-- /.col -->
-					<div class="col-xs-4">
+					<div class="col-xs-4 col-md-offset-4 text-center">
 						<button type="submit" class="btn btn-success btn-block btn-flat" name="btnLogin" title="Masuk Sistem">
 							<b>Masuk</b>
 						</button>
-						
 					</div>
-					<!-- /.col -->
+				</div>
+				<div class="row" style="padding-top: 15px;">
+					<div class="col-md-10 col-md-offset-1 text-center">
+						<p style="opacity: 0.5 ;color: gray; font-size: 14px;">
+							Belum mempunyai akun?<a href="daftar.php" style="color: blue; text-decoration: underline;">Daftar disini!</a>
+						</p>
+					</div>
 				</div>
 			</form>
-
-			<!-- Tombol Pendaftaran Anggota -->
-				<div class="row">
-					<div class="col-xs-7">
-						<a href="daftar.php" class="btn btn-success btn-block btn-flat">
-							<b>Pendaftaran Anggota</b>
-						</a>
-					</div>
-				</div>
-
-			<!-- /.social-auth-links -->
-
 		</div>
 		<!-- /.login-box-body -->
 	</div>
@@ -101,7 +90,33 @@ include "inc/koneksi.php";
 </body>
 
 </html>
+<?php
+	if (isset($_GET['page'])) {
+		$hal = $_GET['page'];
+		
+		switch ($hal) {
+				//Klik Halaman Home Pengguna
+			case 'admin':
+				include "home/admin.php";
+				break;
+			case 'petugas':
+				include "home/petugas.php";
+				break;
+			
+			case 'login':
+				header("location: login.php");
+				break;
+			case 'signin':
+				header("location: daftar.php");
+				break;
 
+			default:
+				echo "<center><br><br><br><br><br><br><br><br><br>
+		<h1> Halaman tidak ditemukan !</h1></center>";
+				break;
+		}
+	}
+?>
 
 <?php 
 include "inc/koneksi.php";
