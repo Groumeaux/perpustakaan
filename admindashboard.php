@@ -121,10 +121,10 @@ include "inc/koneksi.php";
 								</span>
 							</a>
 						</li>
-						<!-- <li class="treeview">
+						<li class="treeview">
 							<a href="#">
 								<i class="glyphicon glyphicon-menu-hamburger"></i>
-								<span>Daftar Reservasi</span>
+								<span>Log</span>
 								<span class="pull-right-container">
 									<i class="fa fa-angle-left pull-right"></i>
 								</span>
@@ -132,15 +132,15 @@ include "inc/koneksi.php";
 							<ul class="treeview-menu">
 
 								<li>
-									<a href="?page=signin">
-										<i class="glyphicon glyphicon-user"></i>Sign-in</a>
+									<a href="?page=log_pinjam">
+										<i class="glyphicon glyphicon-log-out"></i>Log Pinjam</a>
 								</li>
 								<li>
-									<a href="?page=login">
-										<i class="glyphicon glyphicon-log-in"></i>Log-in</a>
+									<a href="?page=log_kembali">
+										<i class="glyphicon glyphicon-log-in"></i>Log Kembali</a>
 								</li>
 							</ul>
-						</li> -->
+						</li>
                         <!-- <li class="treeview">
 							<a href="?page=data_sirkul">
 								<i class="glyphicon glyphicon-user"></i>

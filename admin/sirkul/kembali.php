@@ -1,7 +1,12 @@
 <?php
 
-    if(isset($_GET['kode'])){
-    $sql_ubah = "UPDATE tb_sirkulasi SET status='KEM' WHERE id_sk='".$_GET['kode']."'";
+ $tgl_dikembalikan = date('Y-m-d'); 
+
+        $sql_ubah = "UPDATE tb_sirkulasi 
+                 SET status='KEM', tgl_dikembalikan='$tgl_dikembalikan' 
+                 WHERE id_sk='" . $_GET['kode'] . "'";
+
+
     $query_ubah = mysqli_query($koneksi, $sql_ubah);
 
     if ($query_ubah) {
@@ -21,4 +26,4 @@
             }
         })</script>";
     }
-	}
+	
