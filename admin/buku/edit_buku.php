@@ -74,6 +74,12 @@
 							<input class="form-control" name="isbn" value="<?php echo $data_cek['isbn']; ?>">
 						</div>
 
+						<div class="form-group">
+							<label>Cover Image</label>
+							<input type="file" name="file" id="file">
+							<p style="opacity: 0.5 ;color: gray; font-size: 14px;">Format yang diterima : jpg, jpeg, atau png</p>
+						</div>
+
 					</div>
 					<!-- /.box-body -->
 
@@ -94,15 +100,64 @@ if (isset ($_POST['Ubah'])){
 	// Get rid of hyphens
 	$isbn = str_replace('-', '', $_POST['isbn']);
 
-    $sql_ubah = "UPDATE tb_buku SET
+	if (isset($_FILES['file']) && $_FILES['file']['error'] == UPLOAD_ERR_OK) {
+		// proses cover buku
+		$targetDir = "images/covers/";
+
+		// File information
+		$fileNameBefore = basename($_FILES['file']['name']);
+		$targetFilePath = $targetDir . $fileNameBefore;
+		$fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+	
+		// Validate file type
+		$allowedTypes = ['jpg', 'jpeg', 'png'];
+		if (in_array(strtolower($fileType), $allowedTypes)) {
+			// Move the uploaded file to the directory
+			if (move_uploaded_file($_FILES['file']['tmp_name'], $targetFilePath)) {
+				$filename = $fileNameBefore;
+			} else {
+				echo 
+				"<script>
+					Swal.fire({
+						title: 'Upload Gagal!',
+						text: 'Terjadi kesalahan, coba lagi.',
+						icon: 'error',
+						confirmButtonText: 'OK'
+					});
+				</script>";
+			}
+		} else {
+			echo 
+			"<script>
+                Swal.fire({
+                    title: 'Upload Cover Gagal!',
+                    text: 'Tolong upload Gambar dengan format jpg, jpeg, atau png!',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            </script>";
+		}
+
+		$sql_ubah = "UPDATE tb_buku SET
+        judul_buku='".$_POST['judul_buku']."',
+        pengarang='".$_POST['pengarang']."',
+        penerbit='".$_POST['penerbit']."',
+        th_terbit='".$_POST['th_terbit']."',
+		isbn = '".$isbn."',
+		cover = '".$filename."'
+        WHERE id_buku='".$_POST['id_buku']."'";
+    	$query_ubah = mysqli_query($koneksi, $sql_ubah);
+	} else {
+		$sql_ubah = "UPDATE tb_buku SET
         judul_buku='".$_POST['judul_buku']."',
         pengarang='".$_POST['pengarang']."',
         penerbit='".$_POST['penerbit']."',
         th_terbit='".$_POST['th_terbit']."',
 		isbn = '".$isbn."'
         WHERE id_buku='".$_POST['id_buku']."'";
-    $query_ubah = mysqli_query($koneksi, $sql_ubah);
-
+    	$query_ubah = mysqli_query($koneksi, $sql_ubah);
+	}
+	
     if ($query_ubah) {
         echo "<script>
         Swal.fire({title: 'Ubah Data Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'

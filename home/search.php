@@ -14,7 +14,7 @@ if (isset($_GET['query'])) {
     $searchTerms = explode(" ", $query); 
 
     // Build the SQL query dynamically
-    $sql = "SELECT judul_buku, pengarang, penerbit, th_terbit, isbn FROM tb_buku WHERE";
+    $sql = "SELECT judul_buku, pengarang, penerbit, th_terbit, isbn, cover FROM tb_buku WHERE";
     
     // For each search term, add a condition to the WHERE clause
     $conditions = [];
@@ -59,7 +59,7 @@ if (isset($_GET['query'])) {
             }
             echo '<div class="col-md-3 col-sm-6">';
                 echo '<div class="panel panel-default">';
-                    echo '<div class="panel-heading" style="padding: 0; height: 280px; overflow: hidden;"><img src="' . htmlspecialchars($cover, ENT_QUOTES, 'UTF-8') . '" alt="' . htmlspecialchars($row['cover'], ENT_QUOTES, 'UTF-8') . '" class="img-responsive" style="width: 100%; height: 100%;"></div>';
+                    echo '<div class="panel-heading" style="padding: 0; height: 280px; overflow: hidden;"><img src="' . htmlspecialchars($cover, ENT_QUOTES, 'UTF-8') . '" alt="' . htmlspecialchars($row['cover'], ENT_QUOTES, 'UTF-8') . '" class="img-responsive" style="object-fit: scale-down; width: 100%; height: 100%;"></div>';
                         echo '<div class="panel-body">';
                             echo '<h4><strong>' . htmlspecialchars($row['judul_buku'], ENT_QUOTES, 'UTF-8') . '</strong></h4>';
                             echo '<p>Oleh: <strong>' . htmlspecialchars($row['pengarang'], ENT_QUOTES, 'UTF-8') . '</strong> (Tahun: <strong>' . htmlspecialchars($row['th_terbit'], ENT_QUOTES, 'UTF-8') . '</strong>)</p>';

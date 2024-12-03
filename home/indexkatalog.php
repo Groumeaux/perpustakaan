@@ -44,7 +44,7 @@
             <div class="col-md-3 col-sm-6">
                 <div class="panel panel-default">
                     <div class="panel-heading" style="padding: 0; height: 280px; overflow: hidden;">
-                        <img src="<?= $cover ?>" alt="<?= $data['cover']; ?>" class="img-responsive" style="width: 100%; height: 100%;">
+                        <img src="<?= $cover ?>" alt="<?= $data['cover']; ?>" class="img-responsive" style="object-fit: scale-down;width: 100%; height: 100%;">
                     </div>
                     <div class="panel-body">
                         <h4><strong><?php echo $data['judul_buku'];  ?></strong></h4>

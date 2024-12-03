@@ -38,7 +38,7 @@
                 <div class="panel panel-default" style="position: relative;">
                     <button class="btn btn-success" style="position: absolute; top: 5px; right: 5px; z-index: 10;" onclick="confirmAction('<?php echo $data['id_buku'] ?>')">Reservasi</button>
                     <div class="panel-heading" style="padding: 0; height: 280px; overflow: hidden;">
-                        <img src="<?= $cover ?>" alt="<?= $data['cover']; ?>" class="img-responsive" style="width: 100%; height: 100%;">
+                        <img src="<?= $cover ?>" alt="<?= $data['cover']; ?>" class="img-responsive" style="object-fit: scale-down;width: 100%; height: 100%;">
                     </div>
                     <div class="panel-body">
                         <h4><strong><?php echo $data['judul_buku'];  ?></strong></h4>
