@@ -9,8 +9,6 @@ if (isset($_SESSION["ses_level"]) && $_SESSION["ses_level"] == "Administrator") 
     exit;
 } else {
     session_destroy();
-    header("location: login.php"); // Redirect to a login page or other appropriate page
-    exit;
 }
 
 

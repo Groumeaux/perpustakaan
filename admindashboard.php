@@ -141,14 +141,14 @@ include "inc/koneksi.php";
 								</li>
 							</ul>
 						</li> -->
-                        <li class="treeview">
+                        <!-- <li class="treeview">
 							<a href="?page=data_sirkul">
 								<i class="glyphicon glyphicon-user"></i>
 								<span>Akun Anda</span>
 								<span class="pull-right-container">
 								</span>
 							</a>
-						</li>
+						</li> -->
                         <li class="treeview">
 							<a href="logout.php">
 								<i class="glyphicon glyphicon-log-out"></i>

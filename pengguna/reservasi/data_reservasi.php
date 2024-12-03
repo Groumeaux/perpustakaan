@@ -77,14 +77,14 @@
                                                 <a href="?page=panjang&kode=<?php echo $data['id_reservasi']; ?>" 
                                                 onclick="return confirm('Perpanjang Data Ini ?')" 
                                                 title="Perpanjang">
-                                                    <i class="glyphicon glyphicon-upload"></i> Perpanjang
+                                                    <i class="glyphicon glyphicon-upload"></i> ...
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="?page=kembali&kode=<?php echo $data['id_reservasi']; ?>" 
                                                 onclick="return confirm('Kembalikan Buku Ini ?')" 
                                                 title="Kembalikan">
-                                                    <i class="glyphicon glyphicon-download"></i> Kembalikan
+                                                    <i class="glyphicon glyphicon-download"></i> Batal Reservasi
                                                 </a>
                                             </li>
                                         </ul>

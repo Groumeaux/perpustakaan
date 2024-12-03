@@ -111,7 +111,7 @@ include "inc/koneksi.php";
             echo "<script>  
                 Swal.fire({
                     title: 'Pendaftaran Berhasil!',
-                    text: 'Username Anda adalah $username. Silakan login menggunakan ID dan password Anda.',
+                    text: 'Username Anda adalah $username. Silakan login menggunakan Username dan Password Anda.',
                     icon: 'success',
                     confirmButtonText: 'OK'
                 }).then((result) => {
