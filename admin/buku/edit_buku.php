@@ -5,6 +5,11 @@
         $query_cek = mysqli_query($koneksi, $sql_cek);
         $data_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
     }
+
+	function formatIsbnWithHyphens($isbn) {
+		return substr($isbn, 0, 3) . '-' . substr($isbn, 3, 1) . '-' . substr($isbn, 4, 4) . '-' . substr($isbn, 8, 4) . '-' . substr($isbn, 12, 1);
+	}
+	$formattedIsbn = formatIsbnWithHyphens($data_cek['isbn']);
 ?>
 
 <section class="content-header">
@@ -64,6 +69,11 @@
 							<input class="form-control" name="th_terbit" value="<?php echo $data_cek['th_terbit']; ?>">
 						</div>
 
+						<div class="form-group">
+							<label>ISBN</label>
+							<input class="form-control" name="isbn" value="<?php echo $data_cek['isbn']; ?>">
+						</div>
+
 					</div>
 					<!-- /.box-body -->
 
@@ -80,11 +90,16 @@
 
 if (isset ($_POST['Ubah'])){
     //mulai proses ubah
+
+	// Get rid of hyphens
+	$isbn = str_replace('-', '', $_POST['isbn']);
+
     $sql_ubah = "UPDATE tb_buku SET
         judul_buku='".$_POST['judul_buku']."',
         pengarang='".$_POST['pengarang']."',
         penerbit='".$_POST['penerbit']."',
-        th_terbit='".$_POST['th_terbit']."'
+        th_terbit='".$_POST['th_terbit']."',
+		isbn = '".$isbn."'
         WHERE id_buku='".$_POST['id_buku']."'";
     $query_ubah = mysqli_query($koneksi, $sql_ubah);
 

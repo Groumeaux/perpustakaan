@@ -33,9 +33,10 @@
                         <img src="https://placehold.co/1000x800" alt="Book Cover 1" class="img-responsive" style="width: 100%; height: 100%;">
                     </div>
                     <div class="panel-body">
-                        <h4>Book Name: <strong><?php echo $data['judul_buku'];  ?></strong></h4>
-                        <p>Author: <strong><?php echo $data['pengarang'];  ?></strong> (Published: <strong><?php echo $data['th_terbit'];  ?></strong>)</p>
-                        <p>Publisher: <strong><?php echo $data['penerbit'];  ?></strong></strong></p>
+                        <h4><strong><?php echo $data['judul_buku'];  ?></strong></h4>
+                        <p>Oleh: <strong><?php echo $data['pengarang'];  ?></strong> (Tahun: <strong><?php echo $data['th_terbit'];  ?></strong>)</p>
+                        <p>Penerbit: <strong><?php echo $data['penerbit'];  ?></strong></strong></p>
+                        <p>ISBN: <strong><?php echo $data['isbn'];  ?></strong></strong></p>
                     </div>
                 </div>
             </div>

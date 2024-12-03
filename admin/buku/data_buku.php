@@ -60,7 +60,9 @@
 							<td>
 								<?php echo $data['th_terbit']; ?>
 							</td>
-
+							<td>
+								<?php echo $data['isbn']; ?>
+							</td>
 							<td>
 								<a href="?page=MyApp/edit_buku&kode=<?php echo $data['id_buku']; ?>" title="Ubah"
 								 class="btn btn-success">

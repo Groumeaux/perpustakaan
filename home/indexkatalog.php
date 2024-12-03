@@ -1,4 +1,8 @@
 <?php
+    function formatIsbnWithHyphens($isbn) {
+        return substr($isbn, 0, 3) . '-' . substr($isbn, 3, 1) . '-' . substr($isbn, 4, 4) . '-' . substr($isbn, 8, 4) . '-' . substr($isbn, 12, 1);
+    }
+
 	$sql = $koneksi->query("SELECT count(id_buku) as buku from tb_buku");
 	while ($data= $sql->fetch_assoc()) {
 	
@@ -30,6 +34,7 @@
             <?php
                 $sql = $koneksi->query("SELECT * from tb_buku");
                 while ($data= $sql->fetch_assoc()) {
+                    $isbn = formatIsbnWithHyphens($data['isbn']);
             ?>
             <div class="col-md-3 col-sm-6">
                 <div class="panel panel-default">
@@ -37,9 +42,10 @@
                         <img src="https://placehold.co/1000x800" alt="Book Cover 1" class="img-responsive" style="width: 100%; height: 100%;">
                     </div>
                     <div class="panel-body">
-                        <h4>Book Name: <strong><?php echo $data['judul_buku'];  ?></strong></h4>
-                        <p>Author: <strong><?php echo $data['pengarang'];  ?></strong> (Published: <strong><?php echo $data['th_terbit'];  ?></strong>)</p>
-                        <p>Publisher: <strong><?php echo $data['penerbit'];  ?></strong></strong></p>
+                        <h4><strong><?php echo $data['judul_buku'];  ?></strong></h4>
+                        <p>Oleh: <strong><?php echo $data['pengarang'];  ?></strong> (Tahun: <strong><?php echo $data['th_terbit'];  ?></strong>)</p>
+                        <p>Penerbit: <strong><?php echo $data['penerbit'];  ?></strong></strong></p>
+                        <p>ISBN: <strong><?php echo $isbn;  ?></strong></strong></p>
                     </div>
                 </div>
             </div>

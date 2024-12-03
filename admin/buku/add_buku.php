@@ -65,6 +65,11 @@ if (strlen($tambah) == 1) {
 							<input type="number" name="th_terbit" id="th_terbit" class="form-control" placeholder="Tahun Terbit">
 						</div>
 
+						<div class="form-group">
+							<label>ISBN</label>
+							<input type="number" name="isbn" id="isbn" class="form-control" placeholder="No ISBN">
+						</div>
+
 					</div>
 					<!-- /.box-body -->
 
@@ -80,13 +85,16 @@ if (strlen($tambah) == 1) {
 <?php
 
     if (isset ($_POST['Simpan'])){
-    
-        $sql_simpan = "INSERT INTO tb_buku (id_buku,judul_buku,pengarang,penerbit,th_terbit) VALUES (
+		
+		$isbn = str_replace('-', '', $_POST['isbn']);
+        $sql_simpan = "INSERT INTO tb_buku (id_buku,judul_buku,pengarang,penerbit,th_terbit,isbn) VALUES (
            '".$_POST['id_buku']."',
           '".$_POST['judul_buku']."',
           '".$_POST['pengarang']."',
           '".$_POST['penerbit']."',
-          '".$_POST['th_terbit']."')";
+          '".$_POST['th_terbit']."',
+		  '".$isbn."'
+		  )";
         $query_simpan = mysqli_query($koneksi, $sql_simpan);
         mysqli_close($koneksi);
 
