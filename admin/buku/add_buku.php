@@ -70,6 +70,12 @@ if (strlen($tambah) == 1) {
 							<input type="number" name="isbn" id="isbn" class="form-control" placeholder="No ISBN">
 						</div>
 
+						<div class="form-group">
+							<label>Cover Image</label>
+							<input type="file" name="file" id="file">
+							<p style="opacity: 0.5 ;color: gray; font-size: 14px;">Format yang diterima : jpg, jpeg, atau png</p>
+						</div>
+
 					</div>
 					<!-- /.box-body -->
 
@@ -86,35 +92,74 @@ if (strlen($tambah) == 1) {
 
     if (isset ($_POST['Simpan'])){
 		
+	// Process cover image
+		// Directory where images will be saved
+		$targetDir = "images/covers/";
+
+		// File information
+		$fileNameBefore = basename($_FILES['file']['name']);
+		$targetFilePath = $targetDir . $fileNameBefore;
+		$fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+	
+		// Validate file type
+		$allowedTypes = ['jpg', 'jpeg', 'png'];
+		if (in_array(strtolower($fileType), $allowedTypes)) {
+			// Move the uploaded file to the directory
+			if (move_uploaded_file($_FILES['file']['tmp_name'], $targetFilePath)) {
+				$filename = $fileNameBefore;
+			} else {
+				echo 
+				"<script>
+					Swal.fire({
+						title: 'Upload Gagal!',
+						text: 'Terjadi kesalahan, coba lagi.',
+						icon: 'error',
+						confirmButtonText: 'OK'
+					});
+				</script>";
+			}
+		} else {
+			echo 
+			"<script>
+                Swal.fire({
+                    title: 'Upload Cover Gagal!',
+                    text: 'Tolong upload Gambar dengan format jpg, jpeg, atau png!',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            </script>";
+		}
+
 		$isbn = str_replace('-', '', $_POST['isbn']);
-        $sql_simpan = "INSERT INTO tb_buku (id_buku,judul_buku,pengarang,penerbit,th_terbit,isbn) VALUES (
-           '".$_POST['id_buku']."',
-          '".$_POST['judul_buku']."',
-          '".$_POST['pengarang']."',
-          '".$_POST['penerbit']."',
-          '".$_POST['th_terbit']."',
-		  '".$isbn."'
-		  )";
+        $sql_simpan = "INSERT INTO tb_buku (id_buku,judul_buku,pengarang,penerbit,th_terbit,isbn,cover) VALUES (
+           	'".$_POST['id_buku']."',
+			'".$_POST['judul_buku']."',
+			'".$_POST['pengarang']."',
+			'".$_POST['penerbit']."',
+			'".$_POST['th_terbit']."',
+			'".$isbn."',
+			'".$filename."'
+			)";
         $query_simpan = mysqli_query($koneksi, $sql_simpan);
         mysqli_close($koneksi);
 
     if ($query_simpan){
 
-      echo "<script>
-      Swal.fire({title: 'Tambah Data Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'
-      }).then((result) => {
-          if (result.value) {
-              window.location = 'index.php?page=MyApp/data_buku';
-          }
-      })</script>";
-      }else{
-      echo "<script>
-      Swal.fire({title: 'Tambah Data Gagal',text: '',icon: 'error',confirmButtonText: 'OK'
-      }).then((result) => {
-          if (result.value) {
-              window.location = 'index.php?page=MyApp/add_buku';
-          }
-      })</script>";
+		echo "<script>
+		Swal.fire({title: 'Tambah Data Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'
+		}).then((result) => {
+			if (result.value) {
+				window.location = 'index.php?page=MyApp/data_buku';
+			}
+		})</script>";
+		}else{
+		echo "<script>
+		Swal.fire({title: 'Tambah Data Gagal',text: '',icon: 'error',confirmButtonText: 'OK'
+		}).then((result) => {
+			if (result.value) {
+				window.location = 'index.php?page=MyApp/add_buku';
+			}
+		})</script>";
     }
   }
     

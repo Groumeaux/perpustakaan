@@ -1,6 +1,6 @@
 <?php
     function formatIsbnWithHyphens($isbn) {
-        return substr($isbn, 0, 3) . '-' . substr($isbn, 3, 1) . '-' . substr($isbn, 4, 4) . '-' . substr($isbn, 8, 4) . '-' . substr($isbn, 12, 1);
+        return substr($isbn, 0, 3) . '-' . substr($isbn, 3, 3) . '-' . substr($isbn, 6, 4) . '-' . substr($isbn, 10, 2) . '-' . substr($isbn, 12, 1);
     }
 
 	$sql = $koneksi->query("SELECT count(id_buku) as buku from tb_buku");
@@ -35,11 +35,16 @@
                 $sql = $koneksi->query("SELECT * from tb_buku");
                 while ($data= $sql->fetch_assoc()) {
                     $isbn = formatIsbnWithHyphens($data['isbn']);
+                    if ($data['cover'] == "" || $data['cover'] == NULL){
+                        $cover = "https://placehold.co/1000x800";
+                    } else {
+                        $cover = "images/covers/".$data['cover'];
+                    }
             ?>
             <div class="col-md-3 col-sm-6">
                 <div class="panel panel-default">
                     <div class="panel-heading" style="padding: 0; height: 280px; overflow: hidden;">
-                        <img src="https://placehold.co/1000x800" alt="Book Cover 1" class="img-responsive" style="width: 100%; height: 100%;">
+                        <img src="<?= $cover ?>" alt="<?= $data['cover']; ?>" class="img-responsive" style="width: 100%; height: 100%;">
                     </div>
                     <div class="panel-body">
                         <h4><strong><?php echo $data['judul_buku'];  ?></strong></h4>
