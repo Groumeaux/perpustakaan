@@ -1,7 +1,7 @@
 <section class="content-header">
 	<h1>
 		Reservasi
-		<small>Saya</small>
+		<small><?php echo $data_nama; ?></small>
 	</h1>
 	<ol class="breadcrumb">
 		<li>
@@ -60,35 +60,19 @@
 								</td>
                                 <td>
                                     <?php 
-                                        if ($data['status'] == "Diterima" || "Ditolak"){    
+                                        if ($data['status'] == "Diterima" || $data['status'] == "Ditolak"){    
                                     ?>
                                     -
                                     <?php
-                                        }elseif (($data['status'] == "Pending")) {
+                                        } elseif ($data['status'] == "Pending") {
                                     ?>
-                                    <!-- Dropdown Button -->
-                                    <div class="dropdown">
-                                        <button class="btn btn-primary dropdown-toggle" type="button" id="actionMenu" data-toggle="dropdown" aria-expanded="false">
-                                            Action <span class="caret"></span>
-                                        </button>
-                                        <!-- Dropdown Menu -->
-                                        <ul class="dropdown-menu" role="menu" aria-labelledby="actionMenu">
-                                            <li>
-                                                <a href="?page=panjang&kode=<?php echo $data['id_reservasi']; ?>" 
-                                                onclick="return confirm('Perpanjang Data Ini ?')" 
-                                                title="Perpanjang">
-                                                    <i class="glyphicon glyphicon-upload"></i> ...
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="?page=kembali&kode=<?php echo $data['id_reservasi']; ?>" 
-                                                onclick="return confirm('Kembalikan Buku Ini ?')" 
-                                                title="Kembalikan">
-                                                    <i class="glyphicon glyphicon-download"></i> Batal Reservasi
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    <!-- Batal reservasi -->
+                                    <a href="?page=reservasiuser/delete_reservasi&id_reservasi=<?php echo $data['id_reservasi']; ?>" 
+										   class="btn btn-danger btn-sm" 
+                                           onclick="return confirm('Batalkan reservasi ini?')" 
+                                           title="Batalkan">
+                                            <i class="glyphicon glyphicon-remove"></i> Batalkan Reservasi
+                                        </a>
                                     <?php
                                         }
                                     ?>

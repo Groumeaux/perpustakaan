@@ -173,7 +173,7 @@ include "inc/koneksi.php";
 						case 'petugas':
 							include "home/petugas.php";
 							break;
-                        
+
                         case 'katalog':
                             include "pengguna/kataloguser.php";
                             break;
@@ -186,6 +186,10 @@ include "inc/koneksi.php";
                             session_destroy();
                             header("location: logout.php");
                             break;
+
+						case 'reservasiuser/delete_reservasi':
+							include "pengguna/reservasi/delete_reservasi.php";
+							break;
 
                         case 'login':
                             header("location: login.php");
