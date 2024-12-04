@@ -122,6 +122,14 @@ include "inc/koneksi.php";
 							</a>
 						</li>
 						<li class="treeview">
+							<a href="?page=data_sirkul">
+								<i class="glyphicon glyphicon-list-alt"></i>
+								<span>Sirkulasi</span>
+								<span class="pull-right-container">
+								</span>
+							</a>
+						</li>
+						<li class="treeview">
 							<a href="#">
 								<i class="glyphicon glyphicon-menu-hamburger"></i>
 								<span>Log</span>

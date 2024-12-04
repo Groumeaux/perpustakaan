@@ -3,7 +3,7 @@
 session_start();
 if (isset($_SESSION["ses_level"]) && $_SESSION["ses_level"] == "Administrator") {
     header("location: admindashboard.php");
-    exit; // Always exit after a header() redirection
+    exit;
 } elseif (isset($_SESSION["ses_level"]) && $_SESSION["ses_level"] == "Pengguna") {
     header("location: userdashboard.php");
     exit;
@@ -15,7 +15,6 @@ if (isset($_SESSION["ses_level"]) && $_SESSION["ses_level"] == "Administrator") 
 //KONEKSI DB
 include "inc/koneksi.php";
 ?>
-
 <!DOCTYPE html>
 <html>
 
@@ -41,7 +40,8 @@ include "inc/koneksi.php";
 	<!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
 	<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
-
+	<!-- css for the book cards -->
+	<link rel="stylesheet" href="dist/css/catalogue_style.css">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 
@@ -119,11 +119,11 @@ include "inc/koneksi.php";
 							<ul class="treeview-menu">
 
 								<li>
-									<a href="?page=signin">
+									<a href="daftar.php">
 										<i class="glyphicon glyphicon-user"></i>Daftar</a>
 								</li>
 								<li>
-									<a href="?page=login">
+									<a href="login.php">
 										<i class="glyphicon glyphicon-log-in"></i>Masuk akun</a>
 								</li>
 							</ul>
@@ -145,6 +145,12 @@ include "inc/koneksi.php";
 					$hal = $_GET['page'];
                     
 					switch ($hal) {
+						case 'login':
+                            header("location: login.php");
+                            break;
+                        case 'signin':
+                            header("location: daftar.php");
+                            break;
 							//Klik Halaman Home Pengguna
 						case 'admin':
 							include "home/admin.php";
@@ -153,12 +159,7 @@ include "inc/koneksi.php";
 							include "home/petugas.php";
 							break;
 
-                        case 'login':
-                            header("location: login.php");
-                            break;
-                        case 'signin':
-                            header("location: daftar.php");
-                            break;
+                        
 
 							//Pengguna
 						case 'MyApp/data_pengguna':
@@ -251,9 +252,6 @@ include "inc/koneksi.php";
 					include "home/indexkatalog.php";
 				}
 				?>
-
-
-
 			</section>
 			<!-- /.content -->
 		</div>

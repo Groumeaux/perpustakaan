@@ -36,24 +36,40 @@
                 while ($data= $sql->fetch_assoc()) {
                     $isbn = formatIsbnWithHyphens($data['isbn']);
                     if ($data['cover'] == "" || $data['cover'] == NULL){
-                        $cover = "https://placehold.co/1000x800";
+                        $cover = "https://placehold.co/200x440";
                     } else {
                         $cover = "images/covers/".$data['cover'];
                     }
             ?>
             <div class="col-md-3 col-sm-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading" style="padding: 0; height: 280px; overflow: hidden;">
-                        <img src="<?= $cover ?>" alt="<?= $data['cover']; ?>" class="img-responsive" style="object-fit: scale-down;width: 100%; height: 100%;">
+                <div class="panel panel-default" style="position: relative;">
+                    <!-- Toggle Button -->
+                    <button class="btn btn-circle toggle-btn" onclick="toggleOverlay(this)" style="position: absolute; top: 10px; right: 10px; z-index: 30;">
+                        <span class="toggle-icon">&#9776;</span> <!-- Hamburger icon -->
+                    </button>
+
+                    <!-- Book Cover -->
+                    <div class="panel-heading">
+                        <img src="<?= $cover ?>" alt="<?= $data['cover']; ?>" class="img-responsive cover-img" style="object-fit: cover; width: 100%; height: 100%; position: absolute; top: 0; left: 0;">
+                        <!-- Title and Author with Gradient -->
+                        <div class="book-info-overlay">
+                            <h4><strong><?php echo $data['judul_buku'];  ?></strong></h4>
+                            <p><?php echo $data['pengarang'];  ?> (<?php echo $data['th_terbit'];  ?>)</p>
+                        </div>
                     </div>
-                    <div class="panel-body">
-                        <h4><strong><?php echo $data['judul_buku'];  ?></strong></h4>
-                        <p>Oleh: <strong><?php echo $data['pengarang'];  ?></strong> (Tahun: <strong><?php echo $data['th_terbit'];  ?></strong>)</p>
-                        <p>Penerbit: <strong><?php echo $data['penerbit'];  ?></strong></strong></p>
-                        <p>ISBN: <strong><?php echo $isbn;  ?></strong></strong></p>
+
+                    <!-- Overlay (Hidden by Default) -->
+                    <div class="book-overlay" style="display: none; overflow : auto;">
+                        <div class="overlay-content">
+                            <h4><strong><?php echo $data['judul_buku'];  ?></strong></h4>
+                            <p>Oleh: <strong><?php echo $data['pengarang'];  ?></strong> (Tahun: <strong><?php echo $data['th_terbit'];  ?></strong>)</p>
+                            <p>Penerbit: <strong><?php echo $data['penerbit'];  ?></strong></p>
+                            <p>ISBN: <strong><?php echo $isbn;  ?></strong></p>
+                        </div>
                     </div>
                 </div>
             </div>
+            
             <?php
                 }
             ?>
@@ -115,5 +131,16 @@ function loadAllBooks() {
         console.error("Request failed.");
     };
     xhr.send();
+}
+function toggleOverlay(button) {
+    const card = button.closest('.panel');
+    const overlay = card.querySelector('.book-overlay');
+    const toggleBtn = card.querySelector('.toggle-btn');
+    
+    // Toggle visibility of the overlay
+    overlay.style.display = overlay.style.display === 'flex' ? 'none' : 'flex';
+    
+    // Toggle button active state
+    toggleBtn.classList.toggle('active');
 }
 </script>

@@ -38,6 +38,8 @@ include "inc/koneksi.php";
 	<!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
 	<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+	<!-- css for the book cards -->
+	<link rel="stylesheet" href="dist/css/catalogue_style.css">
 
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
