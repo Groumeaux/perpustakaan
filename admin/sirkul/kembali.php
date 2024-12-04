@@ -6,7 +6,6 @@
                  SET status='KEM', tgl_dikembalikan='$tgl_dikembalikan' 
                  WHERE id_sk='" . $_GET['kode'] . "'";
 
-
     $query_ubah = mysqli_query($koneksi, $sql_ubah);
 
     if ($query_ubah) {

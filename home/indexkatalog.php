@@ -14,7 +14,7 @@
 <section class="content-header">
     <div class="row" style="display: flex; align-items: center;">
         <div class="col-sm-6">
-            <h1 class="m-0">Book Catalogue</h1> 
+            <h1 class="m-0">Katalog Buku</h1> 
         </div>
         <div class="col-sm-6 text-right">
             <form class="form-inline" style="margin: 0;" id="searchForm">
