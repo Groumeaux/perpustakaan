@@ -71,6 +71,11 @@ if (strlen($tambah) == 1) {
 						</div>
 
 						<div class="form-group">
+							<label>Jumlah Buku</label>
+							<input type="number" name="jumlahbuku" id="jumlahbuku" class="form-control" placeholder="Jumlah Buku">
+						</div>
+
+						<div class="form-group">
 							<label>Cover Image</label>
 							<input type="file" name="file" id="file">
 							<p style="opacity: 0.5 ;color: gray; font-size: 14px;">Format yang diterima : jpg, jpeg, atau png</p>
@@ -131,14 +136,15 @@ if (strlen($tambah) == 1) {
 		}
 
 		$isbn = str_replace('-', '', $_POST['isbn']);
-        $sql_simpan = "INSERT INTO tb_buku (id_buku,judul_buku,pengarang,penerbit,th_terbit,isbn,cover) VALUES (
+        $sql_simpan = "INSERT INTO tb_buku (id_buku,judul_buku,pengarang,penerbit,th_terbit,isbn,cover,jml_buku) VALUES (
            	'".$_POST['id_buku']."',
 			'".$_POST['judul_buku']."',
 			'".$_POST['pengarang']."',
 			'".$_POST['penerbit']."',
 			'".$_POST['th_terbit']."',
 			'".$isbn."',
-			'".$filename."'
+			'".$filename."',
+			'".$_POST['jumlahbuku']."'
 			)";
         $query_simpan = mysqli_query($koneksi, $sql_simpan);
         mysqli_close($koneksi);
@@ -149,7 +155,7 @@ if (strlen($tambah) == 1) {
 		Swal.fire({title: 'Tambah Data Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'
 		}).then((result) => {
 			if (result.value) {
-				window.location = 'index.php?page=MyApp/data_buku';
+				window.location = 'admindashboard.php?page=MyApp/data_buku';
 			}
 		})</script>";
 		}else{
@@ -157,7 +163,7 @@ if (strlen($tambah) == 1) {
 		Swal.fire({title: 'Tambah Data Gagal',text: '',icon: 'error',confirmButtonText: 'OK'
 		}).then((result) => {
 			if (result.value) {
-				window.location = 'index.php?page=MyApp/add_buku';
+				window.location = 'admindashboard.php?page=MyApp/add_buku';
 			}
 		})</script>";
     }

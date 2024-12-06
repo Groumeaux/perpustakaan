@@ -41,9 +41,19 @@
                 } else {
                     $cover = "images/covers/".$data['cover'];
                 }
+                if ($data['jml_buku'] > 0){
+                    $available = '<div class="availability-banner">Available</div>';
+                    $disablecard = '';
+                    $jumlahbuku = $data['jml_buku'];
+                } else {
+                    $available = '<div class="availability-banner" style="background-color: red;">Unavailable</div>';
+                    $disablecard = 'card-disabled';
+                    $jumlahbuku = "Unavailable";
+                }
         ?>
             <div class="col-md-3 col-sm-6">
-                <div class="panel panel-default" style="position: relative;">
+                <div class="panel panel-default <?php echo $disablecard ?>" style="position: relative;">
+                    <?php echo $available; ?>
                     <!-- Toggle Button -->
                     <button class="btn btn-circle toggle-btn" onclick="toggleOverlay(this)" style="position: absolute; top: 10px; right: 10px; z-index: 30;">
                         <span class="toggle-icon">&#9776;</span> <!-- Hamburger icon -->
@@ -66,7 +76,8 @@
                             <p>Oleh: <strong><?php echo $data['pengarang'];  ?></strong> (Tahun: <strong><?php echo $data['th_terbit'];  ?></strong>)</p>
                             <p>Penerbit: <strong><?php echo $data['penerbit'];  ?></strong></p>
                             <p>ISBN: <strong><?php echo $isbn;  ?></strong></p>
-                            <!-- Reserve Button -->
+                            <p>Buku tersedia:<strong> <?php echo $jumlahbuku; ?></strong></p>
+                            <!-- Reservasi -->
                             <button class="btn btn-success" onclick="confirmAction('<?php echo $data['id_buku'] ?>')">Reservasi</button>
                         </div>
                     </div>

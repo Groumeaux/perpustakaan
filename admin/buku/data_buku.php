@@ -30,6 +30,8 @@
 							<th>Pengarang</th>
 							<th>Penerbit</th>
 							<th>Tahun</th>
+							<th>ISBN</th>
+							<th>Jumlah Buku</th>
 							<th>Kelola</th>
 						</tr>
 					</thead>
@@ -62,6 +64,9 @@
 							</td>
 							<td>
 								<?php echo $data['isbn']; ?>
+							</td>
+							<td>
+								<?php echo $data['jml_buku']; ?>
 							</td>
 							<td>
 								<a href="?page=MyApp/edit_buku&kode=<?php echo $data['id_buku']; ?>" title="Ubah"

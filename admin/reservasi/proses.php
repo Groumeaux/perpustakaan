@@ -11,7 +11,7 @@ if (isset($_GET['kode']) && isset($_GET['status'])) {
     // Query untuk update status di database
     $sql_update = $koneksi->query("UPDATE tb_reservasi SET status='$status' WHERE id_reservasi='$id_reservasi'");
 
-    if ($sql_update) {
+    if ($sql_update == TRUE && $status == "Diterima") {
         // Jika update berhasil
         
         // Block ambil id
@@ -39,10 +39,19 @@ if (isset($_GET['kode']) && isset($_GET['status'])) {
         // date stuffs
         $tgl_p = date('Y-m-d');
         $tgl_k=date('Y-m-d', strtotime('+7 days', strtotime($tgl_p)));
+        $idbuku = $reservasi['id_buku'];
         
-        echo $reservasi['id_buku'];
-        echo $reservasi['id_anggota'];
+        $caribuku = mysqli_query($koneksi, "SELECT * FROM tb_buku WHERE id_buku='$idbuku'");
+        $ambilbuku = mysqli_fetch_array($caribuku);
+        $jumlahbuku = $ambilbuku['jml_buku'];
 
+        if ($jumlahbuku == 0){
+            echo "<script>
+            alert('Status gagal diperbarui!, Jumlah buku tidak cukup.');
+            window.location.href='../../admindashboard.php?page=MyApp/datareservasi';
+            </script>";
+        }
+        $jumlahbuku = $jumlahbuku - 1;
         $sql_simpan = "INSERT INTO tb_sirkulasi (id_sk,id_buku,id_anggota,tgl_pinjam,status,tgl_kembali) VALUES (
             '".$idsk."',
             '".$reservasi['id_buku']."',
@@ -53,7 +62,11 @@ if (isset($_GET['kode']) && isset($_GET['status'])) {
         $sql_simpan .= "INSERT INTO log_pinjam (id_buku,id_anggota,tgl_pinjam) VALUES (
             '".$reservasi['id_buku']."',
             '".$reservasi['id_anggota']."',
-            '".$tgl_p."')";   
+            '".$tgl_p."')";
+        $sql_update_buku = "UPDATE tb_buku SET 
+        jml_buku = '$jumlahbuku'
+        WHERE id_buku='$idbuku'";
+        $query_update_buku = mysqli_query($koneksi, $sql_update_buku);
         $query_simpan = mysqli_multi_query($koneksi, $sql_simpan);
 
         mysqli_close($koneksi);
@@ -61,12 +74,12 @@ if (isset($_GET['kode']) && isset($_GET['status'])) {
         echo "<script>
             alert('Status berhasil diperbarui! Sirkul telah diperbarui!');
             window.location.href='../../admindashboard.php?page=MyApp/datareservasi';
-        </script>";
+        </script>"; 
     } else {
         // Jika update gagal
         echo "<script>
-            alert('Status gagal diperbarui!');
-            window.location.href='../../userdashboard.php?page=reservasiuser';
+            alert('Reservasi berhasil ditolak!');
+            window.location.href='../../admindashboard.php?page=MyApp/datareservasi';
         </script>";
     }
 } else {

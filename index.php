@@ -117,7 +117,6 @@ include "inc/koneksi.php";
 								</span>
 							</a>
 							<ul class="treeview-menu">
-
 								<li>
 									<a href="daftar.php">
 										<i class="glyphicon glyphicon-user"></i>Daftar</a>

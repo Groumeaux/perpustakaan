@@ -75,6 +75,11 @@
 						</div>
 
 						<div class="form-group">
+							<label>Jumlah Buku</label>
+							<input class="form-control" name="jumlahbuku" value="<?php echo $data_cek['jml_buku']; ?>">
+						</div>
+
+						<div class="form-group">
 							<label>Cover Image</label>
 							<input type="file" name="file" id="file">
 							<p style="opacity: 0.5 ;color: gray; font-size: 14px;">Format yang diterima : jpg, jpeg, atau png</p>
@@ -144,7 +149,8 @@ if (isset ($_POST['Ubah'])){
         penerbit='".$_POST['penerbit']."',
         th_terbit='".$_POST['th_terbit']."',
 		isbn = '".$isbn."',
-		cover = '".$filename."'
+		cover = '".$filename."',
+		jml_buku = '".$_POST['jumlahbuku']."'
         WHERE id_buku='".$_POST['id_buku']."'";
     	$query_ubah = mysqli_query($koneksi, $sql_ubah);
 	} else {
@@ -153,7 +159,8 @@ if (isset ($_POST['Ubah'])){
         pengarang='".$_POST['pengarang']."',
         penerbit='".$_POST['penerbit']."',
         th_terbit='".$_POST['th_terbit']."',
-		isbn = '".$isbn."'
+		isbn = '".$isbn."',
+		jml_buku = '".$_POST['jumlahbuku']."'
         WHERE id_buku='".$_POST['id_buku']."'";
     	$query_ubah = mysqli_query($koneksi, $sql_ubah);
 	}
@@ -163,7 +170,7 @@ if (isset ($_POST['Ubah'])){
         Swal.fire({title: 'Ubah Data Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'
         }).then((result) => {
             if (result.value) {
-                window.location = 'index.php?page=MyApp/data_buku';
+                window.location = 'admindashboard.php?page=MyApp/data_buku';
             }
         })</script>";
         }else{
@@ -171,7 +178,7 @@ if (isset ($_POST['Ubah'])){
         Swal.fire({title: 'Ubah Data Gagal',text: '',icon: 'error',confirmButtonText: 'OK'
         }).then((result) => {
             if (result.value) {
-                window.location = 'index.php?page=MyApp/data_buku';
+                window.location = 'admindashboard.php?page=MyApp/data_buku';
             }
         })</script>";
     }

@@ -99,7 +99,7 @@ include "inc/koneksi.php";
 						<li class="treeview">
 							<a href="?page=MyApp/data_buku">
 								<i class="glyphicon glyphicon-book"></i>
-								<span>Katalog Buku</span>
+								<span>Daftar Buku</span>
 								<span class="pull-right-container">
 								</span>
 							</a>
@@ -115,7 +115,7 @@ include "inc/koneksi.php";
 						</li>
                         <li class="treeview">
 							<a href="?page=MyApp/data_agt">
-								<i class="glyphicon glyphicon-list-alt"></i>
+								<i class="glyphicon glyphicon-user"></i>
 								<span>Daftar Anggota</span>
 								<span class="pull-right-container">
 								</span>
@@ -123,7 +123,7 @@ include "inc/koneksi.php";
 						</li>
 						<li class="treeview">
 							<a href="?page=data_sirkul">
-								<i class="glyphicon glyphicon-list-alt"></i>
+								<i class="glyphicon glyphicon-refresh"></i>
 								<span>Sirkulasi</span>
 								<span class="pull-right-container">
 								</span>
@@ -141,11 +141,11 @@ include "inc/koneksi.php";
 
 								<li>
 									<a href="?page=log_pinjam">
-										<i class="glyphicon glyphicon-log-out"></i>Log Pinjam</a>
+										<i class="glyphicon glyphicon-repeat"></i>Log Pinjam</a>
 								</li>
 								<li>
 									<a href="?page=log_kembali">
-										<i class="glyphicon glyphicon-log-in"></i>Log Kembali</a>
+										<i class="glyphicon glyphicon-share-alt"></i>Log Kembali</a>
 								</li>
 							</ul>
 						</li>
