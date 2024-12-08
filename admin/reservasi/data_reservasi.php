@@ -23,7 +23,7 @@ if (isset($_GET['page']) && $_GET['page'] == 'ubah_status') {
 <section class="content-header">
     <h1>
         Reservasi
-        <small>Saya</small>
+        <small>Admin</small>
     </h1>
     <ol class="breadcrumb">
         <li>
@@ -82,35 +82,36 @@ if (isset($_GET['page']) && $_GET['page'] == 'ubah_status') {
                                 <td><?php echo $data['judul_buku']; ?></td>
                                 <td><?php echo date("d/M/Y", strtotime($data['tanggal_reservasi'])); ?></td>
                                 <?php if ($_SESSION['ses_level'] == 'Administrator'): ?>
-                                    <td>
-                                        <?php if ($data['status'] == 'Diterima' || $data['status'] == 'Ditolak'): ?>
-                                            <span class="badge badge-<?php echo ($data['status'] == 'Diterima') ? 'success' : 'danger'; ?>">
-                                                <?php echo $data['status']; ?>
-                                            </span>
-                                        <?php else: ?>
-                                            <div class="dropdown">
-                                                <button class="btn btn-primary dropdown-toggle" type="button" id="actionMenu" data-toggle="dropdown" aria-expanded="false">
-                                                    Action <span class="caret"></span>
-                                                </button>
-                                                <ul class="dropdown-menu" role="menu" aria-labelledby="actionMenu">
-                                                    <li>
-                                                        <a href="admin/reservasi/proses.php?kode=<?php echo $data['id_reservasi']; ?>&status=Diterima" 
-                                                           onclick="return confirm('Setujui reservasi ini?')" 
-                                                           title="Setujui">
-                                                            <i class="glyphicon glyphicon-ok"></i> Setuju
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="admin/reservasi/proses.php?kode=<?php echo $data['id_reservasi']; ?>&status=Ditolak" 
-                                                           onclick="return confirm('Tolak reservasi ini?')" 
-                                                           title="Tolak">
-                                                            <i class="glyphicon glyphicon-remove"></i> Tolak
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        <?php endif; ?>
-                                    </td>
+                                <td>
+                                <?php if ($data['status'] == 'Diterima' || $data['status'] == 'Ditolak'): ?>
+                                    <span class="badge" style="background-color: <?php echo ($data['status'] == 'Diterima') ? 'green' : 'red'; ?>; color: white;">
+                                        <?php echo $data['status']; ?>
+                                    </span>
+                                <?php else: ?>
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle" type="button" id="actionMenu" data-toggle="dropdown" aria-expanded="false">
+                                            Action <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="actionMenu">
+                                            <li>
+                                                <a href="admin/reservasi/proses.php?kode=<?php echo $data['id_reservasi']; ?>&status=Diterima" 
+                                                onclick="return confirm('Setujui reservasi ini?')" 
+                                                title="Setujui">
+                                                    <i class="glyphicon glyphicon-ok"></i> Setuju
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="admin/reservasi/proses.php?kode=<?php echo $data['id_reservasi']; ?>&status=Ditolak" 
+                                                onclick="return confirm('Tolak reservasi ini?')" 
+                                                title="Tolak">
+                                                    <i class="glyphicon glyphicon-remove"></i> Tolak
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                <?php endif; ?>
+                                </td>
+
                                 <?php endif; ?>
                                 <td><?php echo $data['status']; ?></td>
                             </tr>

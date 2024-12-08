@@ -91,7 +91,19 @@ include "inc/koneksi.php";
 			<section class="sidebar">
 				<!-- Sidebar user panel -->
 				</b>
-				
+				<div class="user-panel">
+					<div class="pull-left image">
+						<img src="dist/img/avatar.png" class="img-circle" alt="User Image">
+					</div>
+					<div class="pull-left info">
+						<p>
+							<?php echo $data_nama; ?>
+						</p>
+						<span class="label label-warning">
+							<?php echo $data_level; ?>
+						</span>
+					</div>
+				</div>
 				</br>
 				<!-- /.search form -->
 				<!-- sidebar menu: : style can be found in sidebar.less -->

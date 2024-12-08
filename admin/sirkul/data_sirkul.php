@@ -15,10 +15,6 @@
 <!-- Main content -->
 <section class="content">
 	<div class="box box-primary">
-		<div class="box-header with-border">
-			<a href="?page=add_sirkul" title="Tambah Data" class="btn btn-primary">
-				<i class="glyphicon glyphicon-plus"></i> Tambah Data</a>
-		</div>
 		<!-- /.box-header -->
 		<div class="box-body">
 			<div class="table-responsive">

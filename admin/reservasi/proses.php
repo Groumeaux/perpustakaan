@@ -72,7 +72,7 @@ if (isset($_GET['kode']) && isset($_GET['status'])) {
         mysqli_close($koneksi);
         // Kembali ke datareservasi
         echo "<script>
-            alert('Status berhasil diperbarui! Sirkul telah diperbarui!');
+            alert('Status berhasil diperbarui!');
             window.location.href='../../admindashboard.php?page=MyApp/datareservasi';
         </script>"; 
     } else {

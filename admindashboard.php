@@ -89,7 +89,19 @@ include "inc/koneksi.php";
 			<section class="sidebar">
 				<!-- Sidebar user panel -->
 				</b>
-				
+				<div class="user-panel">
+					<div class="pull-left image">
+						<img src="dist/img/avatar.png" class="img-circle" alt="User Image">
+					</div>
+					<div class="pull-left info">
+						<p>
+							<?php echo $data_nama; ?>
+						</p>
+						<span class="label label-warning">
+							<?php echo $data_level; ?>
+						</span>
+					</div>
+				</div>
 				</br>
 				<!-- /.search form -->
 				<!-- sidebar menu: : style can be found in sidebar.less -->
@@ -99,7 +111,7 @@ include "inc/koneksi.php";
 						<li class="treeview">
 							<a href="?page=MyApp/data_buku">
 								<i class="glyphicon glyphicon-book"></i>
-								<span>Daftar Buku</span>
+								<span>Katalog Buku</span>
 								<span class="pull-right-container">
 								</span>
 							</a>
@@ -115,7 +127,7 @@ include "inc/koneksi.php";
 						</li>
                         <li class="treeview">
 							<a href="?page=MyApp/data_agt">
-								<i class="glyphicon glyphicon-user"></i>
+								<i class="glyphicon glyphicon-list-alt"></i>
 								<span>Daftar Anggota</span>
 								<span class="pull-right-container">
 								</span>
@@ -123,7 +135,7 @@ include "inc/koneksi.php";
 						</li>
 						<li class="treeview">
 							<a href="?page=data_sirkul">
-								<i class="glyphicon glyphicon-refresh"></i>
+								<i class="glyphicon glyphicon-list-alt"></i>
 								<span>Sirkulasi</span>
 								<span class="pull-right-container">
 								</span>
@@ -141,11 +153,11 @@ include "inc/koneksi.php";
 
 								<li>
 									<a href="?page=log_pinjam">
-										<i class="glyphicon glyphicon-repeat"></i>Log Pinjam</a>
+										<i class="glyphicon glyphicon-log-out"></i>Log Pinjam</a>
 								</li>
 								<li>
 									<a href="?page=log_kembali">
-										<i class="glyphicon glyphicon-share-alt"></i>Log Kembali</a>
+										<i class="glyphicon glyphicon-log-in"></i>Log Kembali</a>
 								</li>
 							</ul>
 						</li>

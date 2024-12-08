@@ -42,52 +42,48 @@
                         s.tanggal_reservasi,
                         s.status
                         from tb_reservasi s inner join tb_buku b on s.id_buku=b.id_buku WHERE s.id_anggota = '$idanggota' order by tanggal_reservasi desc");
-						while ($data = $sql->fetch_assoc()) {
+											while ($data = $sql->fetch_assoc()) {
 						?>
 							<tr>
-								<td>
-									<?php echo $no++; ?>
-								</td>
-								<td>
-									<?php echo $data['id_reservasi']; ?>
-								</td>
-								<td>
-									<?php echo $data['judul_buku']; ?>
-								</td>
-								<td>
-									<?php $tgl = $data['tanggal_reservasi'];
-									echo date("d/M/Y", strtotime($tgl)) ?>
-								</td>
-                                <td>
-                                    <?php 
-                                        if ($data['status'] == "Diterima" || $data['status'] == "Ditolak"){    
-                                    ?>
-                                    -
-                                    <?php
-                                        } elseif ($data['status'] == "Pending") {
-                                    ?>
-                                    <!-- Batal reservasi -->
-                                    <a href="?page=reservasiuser/delete_reservasi&id_reservasi=<?php echo $data['id_reservasi']; ?>" 
-										   class="btn btn-danger btn-sm" 
-                                           onclick="return confirm('Batalkan reservasi ini?')" 
-                                           title="Batalkan">
-                                            <i class="glyphicon glyphicon-remove"></i> Batalkan Reservasi
-                                        </a>
-                                    <?php
-                                        }
-                                    ?>
-                                </td>
-                                <td>
-									<?php echo $data['status']; ?>
-								</td>
-							</tr>
-						<?php
-						}
+							<td><?php echo $no++; ?></td>
+							<td><?php echo $data['id_reservasi']; ?></td>
+							<td><?php echo $data['judul_buku']; ?></td>
+							<td>
+								<?php 
+								$tgl = $data['tanggal_reservasi'];
+								echo date("d/M/Y", strtotime($tgl)); 
+								?>
+							</td>
+							<td>
+								<?php 
+								if ($data['status'] == "Diterima" || $data['status'] == "Ditolak") { 
+									echo "-";
+								} elseif ($data['status'] == "Pending") { 
+								?>
+								<!-- Batal reservasi -->
+								<a href="?page=reservasiuser/delete_reservasi&id_reservasi=<?php echo $data['id_reservasi']; ?>" 
+									class="btn btn-danger btn-sm" 
+									onclick="return confirm('Batalkan reservasi ini?')" 
+									title="Batalkan">
+									<i class="glyphicon glyphicon-remove"></i> Batalkan Reservasi
+								</a>
+								<?php 
+								} 
+								?>
+							</td>
+							<td><?php echo $data['status']; ?></td>
+						</tr>
+						<?php 
+						} 
 						?>
 					</tbody>
-
 				</table>
 			</div>
 		</div>
 	</div>
+	<h4> *Note
+		<br> Masa peminjaman buku adalah <span style="color:red; font-weight:bold;">7 hari</span> dari tanggal peminjaman.
+		<br> Jika buku dikembalikan lebih dari masa peminjaman, maka akan dikenakan <span style="color:red; font-weight:bold;">denda</span>
+		<br> sebesar <span style="color:red; font-weight:bold;">Rp 1.000/hari</span>.
+	</h4>
 </section>
