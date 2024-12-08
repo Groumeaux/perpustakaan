@@ -65,7 +65,7 @@ include "inc/koneksi.php";
 				<div class="row" style="padding-top: 15px;">
 					<div class="col-md-10 col-md-offset-1 text-center">
 						<p style="opacity: 0.5 ;color: gray; font-size: 14px;">
-							Belum mempunyai akun?<a href="daftar.php" style="color: blue; text-decoration: underline;">Daftar disini!</a>
+							Belum mempunyai akun? <a href="daftar.php" style="color: blue; text-decoration: underline;">Daftar disini!</a>
 						</p>
 					</div>
 				</div>

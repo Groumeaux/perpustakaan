@@ -31,6 +31,7 @@ include "inc/koneksi.php";
                 <font color="green"><b>Form Pendaftaran</b></font>
             </h3>
         </div>
+
         <!-- Form Pendaftaran -->
         <div class="register-box-body">
             <form action="#" method="post">
@@ -38,6 +39,7 @@ include "inc/koneksi.php";
                     <input type="text" class="form-control" name="nama" placeholder="Nama Lengkap" required>
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
                 </div>
+
                 <div class="form-group">
                     <select class="form-control" name="jekel" required>
                         <option value="" selected disabled>Jenis Kelamin</option>
@@ -45,21 +47,33 @@ include "inc/koneksi.php";
                         <option value="Perempuan">Perempuan</option>
                     </select>
                 </div>
+
                 <div class="form-group has-feedback">
                     <input type="text" class="form-control" name="domisili" placeholder="Domisili (Kota)" required>
                     <span class="glyphicon glyphicon-home form-control-feedback"></span>
                 </div>
+
                 <div class="form-group has-feedback">
                     <input type="text" class="form-control" name="no_hp" placeholder="Nomor HP" required>
                     <span class="glyphicon glyphicon-phone form-control-feedback"></span>
                 </div>
+
                 <div class="form-group has-feedback">
                     <input type="password" class="form-control" name="password" placeholder="Password" required>
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
+
+                <!-- Tombol Batal dan Daftar -->
                 <div class="row">
-                    <div class="col-xs-8"></div>
-                    <div class="col-xs-4">
+                    <!-- Tombol Batal -->
+                    <div class="col-xs-6">
+                        <a href="login.php" class="btn btn-default btn-block btn-flat">
+                            <b>Batal</b>
+                        </a>
+                    </div>
+
+                    <!-- Tombol Daftar -->
+                    <div class="col-xs-6">
                         <button type="submit" class="btn btn-success btn-block btn-flat" name="btnRegister">
                             <b>Daftar</b>
                         </button>
@@ -93,7 +107,6 @@ include "inc/koneksi.php";
             $id_baru = "A001";
         }
 
-
         $array_nama = explode(" ", $nama);
         $username = $array_nama[0];
 
@@ -101,7 +114,7 @@ include "inc/koneksi.php";
         $sql_register = "INSERT INTO tb_anggota (id_anggota, nama, jekel, kelas, no_hp) 
                          VALUES ('$id_baru', '$nama', '$jekel', '$domisili', '$no_hp')";
         $query_register = mysqli_query($koneksi, $sql_register);
-    
+
         // Simpan password ke tabel pengguna
         $sql_user = "INSERT INTO tb_pengguna (id_pengguna, nama_pengguna, username, password, level)
                      VALUES (NULL, '$nama', '$username', '$password', 'Pengguna')";
