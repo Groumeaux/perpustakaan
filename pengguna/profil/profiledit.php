@@ -1,4 +1,5 @@
 <?php
+    $data_nama_old =  $_SESSION["ses_nama"];
     $ambiluser = mysqli_query($koneksi, "SELECT * FROM tb_anggota WHERE id_anggota = '$data_id_anggota'");
     $user = mysqli_fetch_array($ambiluser);
     if ($user['profile_image'] == "" || $user['profile_image'] == NULL ){
@@ -98,17 +99,18 @@
 </div>
 
 <?php
-if (isset ($_POST['editprofil'])){
-    
+if (isset ($_POST['editprofil'])) {
     $iduser = $_POST['id_anggota'];
     $nama = $_POST['nama'];
     $jekel = $_POST['gender'];
     $kota = $_POST['kota'];
     $nohp = $_POST['nohp'];
 
-    if (isset ($_FILES['imginput']) && $_FILES['imginput']['error'] == UPLOAD_ERR_OK){
-        $targetDir = "images/profiles/";
+    // Simpan nama lama untuk pengecekan
+    $nama_lama = $_SESSION["ses_nama"];
 
+    if (isset($_FILES['imginput']) && $_FILES['imginput']['error'] == UPLOAD_ERR_OK) {
+        $targetDir = "images/profiles/";
         $fileNameBefore = basename($_FILES['imginput']['name']);
         $targetFilePath = $targetDir . $fileNameBefore;
         $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
@@ -116,7 +118,6 @@ if (isset ($_POST['editprofil'])){
         // Validate file type
         $allowedTypes = ['jpg', 'jpeg', 'png'];
         if (in_array(strtolower($fileType), $allowedTypes)) {
-            // Move the uploaded file to the directory
             if (move_uploaded_file($_FILES['imginput']['tmp_name'], $targetFilePath)) {
                 $filename = $fileNameBefore;
             }
@@ -127,40 +128,68 @@ if (isset ($_POST['editprofil'])){
         kelas = '$kota',
         no_hp = '$nohp',
         profile_image = '$filename' 
-        WHERE id_anggota = '$iduser'
-        ";
-    }else{
+        WHERE id_anggota = '$iduser'";
+    } else {
         $sql_ubah_profil = "UPDATE tb_anggota SET
         nama = '$nama',
         jekel = '$jekel',
         kelas = '$kota',
         no_hp = '$nohp'
-        WHERE id_anggota = '$iduser'
-        ";
+        WHERE id_anggota = '$iduser'";
     }
 
     $array_nama = explode(" ", $nama);
     $username = $array_nama[0];
 
+    // Simpan perubahan di database
     $querysimpanperubahan = mysqli_query($koneksi, $sql_ubah_profil);
-    $changeusername = mysqli_query($koneksi, "UPDATE tb_pengguna SET nama_pengguna='$nama', username='$username' WHERE nama_pengguna='$nama'");
+    $changeusername = mysqli_query($koneksi, "UPDATE tb_pengguna SET nama_pengguna='$nama', username='$username' WHERE nama_pengguna='$nama_lama'");
     
-    if ($querysimpanperubahan && $changeusername){
+    if ($querysimpanperubahan && $changeusername) {
+        // Periksa apakah nama berubah
+        if ($nama !== $nama_lama) {
+            // Logout dan redirect ke halaman login
+            session_destroy();
+            echo "<script>
+                Swal.fire({
+                    title: 'Nama Telah Diubah',
+                    text: 'Silakan login ulang.',
+                    icon: 'info',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location = 'login.php';
+                    }
+                });
+            </script>";
+        } else {
+            // Tetap di halaman profil
+            echo "<script>
+                Swal.fire({
+                    title: 'Data User Berhasil Diubah',
+                    text: '',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location = 'userdashboard.php?page=profil';
+                    }
+                });
+            </script>";
+        }
+    } else {
         echo "<script>
-            Swal.fire({title: 'Data User Berhasil Diubah',text: '',icon: 'success',confirmButtonText: 'OK'
+            Swal.fire({
+                title: 'Ubah Data User Gagal',
+                text: '',
+                icon: 'error',
+                confirmButtonText: 'OK'
             }).then((result) => {
-                if (result.value) {
+                if (result.isConfirmed) {
                     window.location = 'userdashboard.php?page=profil';
                 }
-            })</script>";
-    }else{
-        echo "<script>
-            Swal.fire({title: 'Ubah Data User Gagal',text: '',icon: 'error',confirmButtonText: 'OK'
-            }).then((result) => {
-                if (result.value) {
-                    window.location = 'userdashboard.php?page=profil';
-                }
-            })</script>";
+            });
+        </script>";
     }
 }
 ?>
