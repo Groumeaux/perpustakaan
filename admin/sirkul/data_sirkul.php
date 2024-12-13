@@ -130,3 +130,96 @@
 		<br> sebesar <span style="color:red; font-weight:bold;">Rp 1.000/hari</span>.
 	</h4>
 </section>
+
+<section class="content-header">
+    <h1>
+        Permohonan Perpanjangan
+    </h1>
+</section>
+<section class="content">
+    <div class="box box-warning">
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="table-responsive">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>ID Request</th>
+                            <th>ID Sirkul</th>
+                            <th>Nama Anggota</th>
+                            <th>Buku</th>
+                            <th>Alasan Perpanjangan</th>
+                            <th>Tanggal Peminjaman</th>
+                            <th>Tanggal Kembali</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $no = 1;
+                        $sql = $koneksi->query("SELECT 
+                            req.id_req, 
+                            a.nama,
+                            b.judul_buku,
+                            req.req_msg,
+							sirkul.tgl_pinjam,
+							sirkul.tgl_kembali,
+                            req.id_sk
+                            FROM tb_requests req
+                            INNER JOIN tb_sirkulasi sirkul 
+                            ON sirkul.id_sk=req.id_sk 
+                            INNER JOIN tb_anggota a
+                            ON sirkul.id_anggota=a.id_anggota
+                            INNER JOIN tb_buku b 
+                            ON sirkul.id_buku = b.id_buku
+                            ORDER BY id_req DESC");
+                        while ($data = $sql->fetch_assoc()) {
+                        ?>
+                            <tr>
+                                <td><?php echo $no++; ?></td>
+                                <td><?php echo $data['id_req']; ?></td>
+                                <td><?php echo $data['id_sk']; ?></td>
+                                <td><?php echo $data['nama']; ?></td>
+                                <td><?php echo $data['judul_buku']; ?></td>
+                                <td><?php echo $data['req_msg'] ?></td>
+								<td>
+									<?php 
+										$tgl = $data['tgl_pinjam'];
+										echo date("d/M/Y", strtotime($tgl)) 
+									?>
+								</td>
+                                <td>
+									<?php 
+										$tgl = $data['tgl_kembali'];
+										echo date("d/M/Y", strtotime($tgl)) 
+									?>
+								</td>
+                                <td>
+									<div class="container" style="height: 100%;width: 120px; display: flex; justify-content: center; align-items: center;">
+										<div class="btn-group">
+											<form action="admindashboard.php?page=perpanjang" method="POST">
+												<input type="hidden" name="sk" value="<?php echo $data['id_sk']; ?>"></input>
+												<input type="hidden" name="req" value="<?php echo $data['id_req']; ?>"></input>
+												<button type="submit" name="diterima" class="glyphicon glyphicon-ok btn btn-sm btn-success">Terima</button>
+											</form>
+											<form action="admindashboard.php?page=perpanjang" method="POST">
+												<input type="hidden" name="sk" value="<?php echo $data['id_sk']; ?>"></input>
+												<input type="hidden" name="req" value="<?php echo $data['id_req']; ?>"></input>
+												<button type="submit" name="ditolak" class="glyphicon glyphicon-remove btn btn-sm btn-danger">Tolak</button>
+											</form>
+										</div>
+									</div>
+								</td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+
+                </table>
+                
+            </div>
+        </div>
+    </div>
+</section>

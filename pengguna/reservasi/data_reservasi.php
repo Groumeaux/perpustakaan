@@ -34,11 +34,6 @@
 
                     <tbody>
                         <?php
-                        // Mengambil data anggota saat ini
-                        $queryanggota = mysqli_query($koneksi, "SELECT * FROM tb_anggota WHERE nama='$data_nama'");
-                        $takeanggota = mysqli_fetch_assoc($queryanggota);
-                        $idanggota = $takeanggota['id_anggota'];
-
                         $no = 1;
 
                         // Mengambil data reservasi dengan menggabungkan tabel reservasi, buku, dan sirkulasi
@@ -47,18 +42,24 @@
                                 b.judul_buku,
                                 s.tanggal_reservasi, 	
                                 sk.tgl_kembali,
-                                s.status
+                                s.status,
+                                sk.id_sk
                             FROM tb_reservasi s 
                             INNER JOIN tb_buku b ON s.id_buku = b.id_buku
                             LEFT JOIN tb_sirkulasi sk ON sk.id_sk = s.id_sk
-                            WHERE s.id_anggota = '$idanggota'
-                            ORDER BY s.tanggal_reservasi DESC
+                            WHERE s.id_anggota = '$data_id_anggota'
+                            ORDER BY s.status ASC, s.tanggal_reservasi ASC
                         ");
 
                         while ($data = $sql->fetch_assoc()) {
                             $tgl_kembali = $data['tgl_kembali'];
                             $today = date("Y-m-d");
 
+                            $ambilperpanjangan = mysqli_query($koneksi, "SELECT sirkul.id_sk, req.id_sk, req.req_status
+                                FROM tb_sirkulasi AS sirkul
+                                LEFT JOIN tb_requests AS req ON sirkul.id_sk = req.id_sk
+                                WHERE sirkul.id_sk = '". $data['id_sk'] ."'");
+                            $ambilreq = mysqli_fetch_array($ambilperpanjangan);
                             ?>
                             <tr>
                                 <td><?php echo $no++; ?></td>
@@ -70,15 +71,34 @@
 
                                 <!-- Tanggal pengembalian -->
                                 <td>
-                                    <?php 
-                                    if ($tgl_kembali) {
+                                    <?php
+                                    $status = $ambilreq['req_status'];
+                                    if ($tgl_kembali && $status != "Pending") {
                                         echo date("d/M/Y", strtotime($tgl_kembali));
+                                        
+                                        $diff = (strtotime($tgl_kembali) - strtotime($today)) / (60 * 60 * 24);
 
-                                        // Kondisi untuk mengecek jatuh tempo
-                                        if ($tgl_kembali <= $today) {
+                                        if ($diff == 0 && $data['status'] == "Diterima") {
+                                            $jatuhtempo = TRUE;
                                             echo "<span style='color: red; font-weight: bold;'> (Sudah Jatuh Tempo!)</span>";
                                         }
+                                        elseif ($diff > 0 && $diff <= 3 && $data['status'] == "Diterima") {
+                                            $jatuhtempo = TRUE;
+                                            echo "<span style='color: red; font-weight: bold;'> (Jatuh Tempo " . $diff . " Hari Lagi!)</span>";
+                                        }
+                                        elseif ($diff < 0 && $data['status'] == "Diterima") {
+                                            $jatuhtempo = TRUE;
+                                            echo "<span style='color: red; font-weight: bold;'> (Sudah Lewat Jatuh Tempo!)</span>";
+                                        }else {
+                                            $jatuhtempo = FALSE;
+                                            echo "-";
+                                        }
+                                    } elseif ($status == "Pending"){
+                                        $jatuhtempo = FALSE;
+                                        echo date("d/M/Y", strtotime($tgl_kembali));
+                                        echo "<span style='color: gray; font-weight: bold;'> (Menunggu persetujuan perpanjangan...)</span>";
                                     } else {
+                                        $jatuhtempo = FALSE;
                                         echo "-";
                                     }
                                     ?>
@@ -86,16 +106,50 @@
 
                                 <!-- Actions untuk membatalkan reservasi -->
                                 <td>
-                                    <?php if ($data['status'] == "Pending"): ?>
+                                    <?php if ($data['status'] == "Pending"){ ?>
                                         <a href="?page=reservasiuser/delete_reservasi&id_reservasi=<?php echo $data['id_reservasi']; ?>" 
                                            class="btn btn-danger btn-sm"
                                            onclick="return confirm('Batalkan reservasi ini?')" 
                                            title="Batalkan">
                                             <i class="glyphicon glyphicon-remove"></i> Batalkan
                                         </a>
-                                    <?php else: ?>
+                                    <?php }elseif ($data['status'] == "Diterima" && $jatuhtempo){ ?>
+                                        <!-- Button to trigger modal -->
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#<?php echo $data['id_sk']; ?>">
+                                            Perpanjang
+                                        </button>
+                                        <div class="modal fade" id="<?php echo $data['id_sk']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                        <h4 class="modal-title" id="myModalLabel">Alasan Perpanjangan Peminjaman Buku</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form method="POST" action="userdashboard.php?page=reservasiuser/perpanjang">
+                                                            <input type="hidden" name="sk" value="<?php echo $data['id_sk']; ?>"></input>
+                                                            <div class="form-group">
+                                                                <textarea class="form-control" name="msg" id="textarea" maxlength="500" placeholder="Type here..." style="width: 550px; height: 240px;"></textarea>
+                                                                <p style="opacity: 0.5 ;color: gray; font-size: 14px;">Maksimal panjang pesan : 500 karakter</p>
+                                                            </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        <button type="submit" name="submitrequest" class="btn btn-primary">Submit</button>
+                                                    </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php 
+                                        } else { 
+                                    ?>
                                         <span>-</span>
-                                    <?php endif; ?>
+                                    <?php
+                                    }
+                                    ?>
                                 </td>
 
                                 <!-- Status reservasi -->

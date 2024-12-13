@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "inc/koneksi.php"; 
 ?>
 
@@ -128,7 +129,6 @@ include "inc/koneksi.php";
 			$jumlah_login = mysqli_num_rows($query_login);
 			
             if ($jumlah_login == 1 ){
-              session_start();
 			  $namapengguna = $data_login["nama_pengguna"];
 			  $findanggota = mysqli_query($koneksi, "SELECT * FROM tb_anggota WHERE nama='$namapengguna'");
 			  $anggota = mysqli_fetch_array($findanggota);
@@ -163,3 +163,4 @@ include "inc/koneksi.php";
                     })</script>";
                 }
 			  }
+?>

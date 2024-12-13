@@ -10,6 +10,19 @@ if (isset($_SESSION["ses_username"]) == "") {
 	$data_user = $_SESSION["ses_username"];
 	$data_level = $_SESSION["ses_level"];
 }
+if (isset($_GET['edit'])){
+	if ($_GET['edit'] == "edited"){
+		$data_nama = $_SESSION["ses_nama"];
+	}
+
+$ambiluser = mysqli_query($koneksi, "SELECT * FROM tb_anggota WHERE id_anggota = '$data_id_anggota'");
+$userinfo = mysqli_fetch_array($ambiluser);
+if ($userinfo['profile_image'] == "" || $userinfo['profile_image'] == NULL ){
+	$profil = "https://via.placeholder.com/150";
+} else {
+	$profil = "images/profiles/".$userinfo['profile_image'];
+}
+}
 //KONEKSI DB
 include "inc/koneksi.php";
 ?>
@@ -203,6 +216,10 @@ include "inc/koneksi.php";
                         case 'reservasiuser':
                             include "pengguna/reservasi/data_reservasi.php";
                             break;
+							
+						case 'reservasiuser/perpanjang':
+							include "pengguna/perpanjang.php";
+							break;
                         
 						case 'profil':
 							include "pengguna/profil/profil.php";

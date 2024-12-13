@@ -72,8 +72,8 @@
                 <label for="gender" class="col-md-3 control-label"><strong>Gender:</strong></label>
                 <div class="col-md-9">
                   <select class="form-control" name="gender" id="gender">
-                    <option value="Laki-laki" <?php echo($user['jekel']=='Laki-laki')? 'checked' : '' ;?>>Laki-laki</option>
-                    <option value="Perempuan" <?php echo($user['jekel']=='Perempuan')? 'checked' : '' ;?>>Perempuan</option>
+                    <option value="Laki-laki" <?php echo($user['jekel']=='Laki-laki')? 'selected' : '' ;?>>Laki-laki</option>
+                    <option value="Perempuan" <?php echo($user['jekel']=='Perempuan')? 'selected' : '' ;?>>Perempuan</option>
                   </select>
                 </div>
               </div>
@@ -138,19 +138,42 @@ if (isset ($_POST['editprofil'])){
         WHERE id_anggota = '$iduser'
         ";
     }
+    $namapengguna = $data_nama;
+    $id_pengguna = null;
+    if ($stmt = $koneksi->prepare("SELECT id_pengguna FROM tb_pengguna WHERE nama_pengguna = ?")) {
+        $stmt->bind_param("s", $namapengguna); 
+        $stmt->execute(); 
+        $stmt->bind_result($id_pengguna); 
+        $stmt->fetch(); 
+        $stmt->close(); 
+    }
 
     $array_nama = explode(" ", $nama);
     $username = $array_nama[0];
 
+    $sql_pengguna = "UPDATE tb_pengguna SET 
+    nama_pengguna='$nama', 
+    username='$username' 
+    WHERE id_pengguna='$id_pengguna'";
+
     $querysimpanperubahan = mysqli_query($koneksi, $sql_ubah_profil);
-    $changeusername = mysqli_query($koneksi, "UPDATE tb_pengguna SET nama_pengguna='$nama', username='$username' WHERE nama_pengguna='$nama'");
+    $changeusername = mysqli_query($koneksi, $sql_pengguna);
     
     if ($querysimpanperubahan && $changeusername){
+        $nama_pengguna = null;
+        if ($stmt = $koneksi->prepare("SELECT nama_pengguna FROM tb_pengguna WHERE id_pengguna = ?")) {
+            $stmt->bind_param("s", $id_pengguna); 
+            $stmt->execute(); 
+            $stmt->bind_result($nama_pengguna); 
+            $stmt->fetch(); 
+            $stmt->close(); 
+        }
+        $_SESSION["ses_nama"] = $nama_pengguna;
         echo "<script>
             Swal.fire({title: 'Data User Berhasil Diubah',text: '',icon: 'success',confirmButtonText: 'OK'
             }).then((result) => {
                 if (result.value) {
-                    window.location = 'userdashboard.php?page=profil';
+                    window.location = 'userdashboard.php?edit=edited';
                 }
             })</script>";
     }else{
