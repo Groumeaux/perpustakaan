@@ -72,7 +72,11 @@
                                 <!-- Tanggal pengembalian -->
                                 <td>
                                     <?php
-                                    $status = $ambilreq['req_status'];
+                                    if (isset($ambilreq['req_status'])){
+                                        $status = $ambilreq['req_status'];
+                                    } else {
+                                        $status = "";
+                                    }
                                     if ($tgl_kembali && $status != "Pending") {
                                         echo date("d/M/Y", strtotime($tgl_kembali));
                                         
