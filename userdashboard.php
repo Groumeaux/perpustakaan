@@ -1,6 +1,7 @@
 <?php
 //Mulai Sesion
 session_start();
+include "inc/koneksi.php";
 if (isset($_SESSION["ses_username"]) == "") {
 	header("location: index.php");
 } else {	
@@ -23,8 +24,6 @@ if ($userinfo['profile_image'] == "" || $userinfo['profile_image'] == NULL ){
 	$profil = "images/profiles/".$userinfo['profile_image'];
 }
 }
-//KONEKSI DB
-include "inc/koneksi.php";
 ?>
 
 <!DOCTYPE html>
