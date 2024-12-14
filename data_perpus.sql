@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2024 at 04:05 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Dec 14, 2024 at 08:23 AM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ CREATE TABLE `log_pinjam` (
   `id_buku` varchar(10) NOT NULL,
   `id_anggota` varchar(10) NOT NULL,
   `tgl_pinjam` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `log_pinjam`
@@ -73,7 +73,7 @@ CREATE TABLE `tb_anggota` (
   `kelas` varchar(50) NOT NULL,
   `no_hp` varchar(15) NOT NULL,
   `profile_image` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_anggota`
@@ -86,8 +86,8 @@ INSERT INTO `tb_anggota` (`id_anggota`, `nama`, `jekel`, `kelas`, `no_hp`, `prof
 ('A004', 'Didik', 'Laki-laki', 'pati', '087789987654', NULL),
 ('A005', 'Edi', 'Laki-laki', 'demak', '089987789098', NULL),
 ('A010', 'Fanuel', 'Laki-laki', 'Tondano', '8180909209', NULL),
-('A012', 'Jane Doe', 'Perempuan', 'Somewhere', '80808008080', NULL),
-('A013', 'John Doe', 'Laki-laki', 'City A', '800808080808', NULL),
+('A012', 'Jane Doel', 'Perempuan', 'Somewhere', '80808008080', NULL),
+('A013', 'John Doeloes', 'Laki-laki', 'City A', '800808080808', 'IMG_20230225_134902_367.jpg'),
 ('A014', 'Falan', 'Laki-laki', 'Jondano', '12345678', NULL);
 
 -- --------------------------------------------------------
@@ -105,21 +105,21 @@ CREATE TABLE `tb_buku` (
   `isbn` varchar(20) DEFAULT NULL,
   `cover` varchar(200) NOT NULL,
   `jml_buku` int(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_buku`
 --
 
 INSERT INTO `tb_buku` (`id_buku`, `judul_buku`, `pengarang`, `penerbit`, `th_terbit`, `isbn`, `cover`, `jml_buku`) VALUES
-('B001', 'Matematika', 'anastasya', 'armi print', '2010', '1000000000000', '', 5),
-('B002', 'RPL 2', 'Eko', 'UMK', '2020', '2000000000000', '', 3),
-('B003', 'C++', 'Anton', 'Toni Perc', '2010', '3000000000000', '', 5),
-('B004', 'CI 4', 'anastasya', 'armi print', '2009', '4000000000000', '', 2),
-('B005', 'Data Mining', 'Anton', 'Toni Perc', '2020', '5000000000000', '', 3),
-('B006', 'Buku Test', 'Saya', 'Saya juga ', '2003', '6000000000000', 'cover_test2.jpg', 1),
-('B007', 'Buku Test', 'John Doe', 'SILibrary', '2023', '7000000000000', '', 1),
-('B008', 'Business 101', 'Someone', 'Somewhere', '2024', '1902000000000', 'cover_test.jpg', 0);
+('B001', 'Matematika', 'anastasya', 'armi print', 2010, '1000000000000', '', 3),
+('B002', 'RPL 2', 'Eko', 'UMK', 2020, '2000000000000', '', 3),
+('B003', 'C++', 'Anton', 'Toni Perc', 2010, '3000000000000', '', 5),
+('B004', 'CI 4', 'anastasya', 'armi print', 2009, '4000000000000', '', 2),
+('B005', 'Data Mining', 'Anton', 'Toni Perc', 2020, '5000000000000', '', 3),
+('B006', 'Buku Test', 'Saya', 'Saya juga ', 2003, '6000000000000', 'cover_test2.jpg', 1),
+('B007', 'Buku Test', 'John Doe', 'SILibrary', 2023, '7000000000000', '', 1),
+('B008', 'Business 101', 'Someone', 'Somewhere', 2024, '1902000000000', 'cover_test.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -133,7 +133,7 @@ CREATE TABLE `tb_pengguna` (
   `username` varchar(20) NOT NULL,
   `password` varchar(35) NOT NULL,
   `level` enum('Administrator','Petugas','Pengguna','','') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_pengguna`
@@ -146,9 +146,22 @@ INSERT INTO `tb_pengguna` (`id_pengguna`, `nama_pengguna`, `username`, `password
 (10, 'Ricky Makalalag', 'Ricky', '827ccb0eea8a706c4c34a16891f84e7b', 'Pengguna'),
 (11, 'Fanuel', 'Fanuel', '827ccb0eea8a706c4c34a16891f84e7b', 'Pengguna'),
 (12, 'Aku Saya', 'Aku', '827ccb0eea8a706c4c34a16891f84e7b', 'Pengguna'),
-(13, 'Jane Doe', 'Jane', '827ccb0eea8a706c4c34a16891f84e7b', 'Pengguna'),
-(14, 'John Doe', 'John', '827ccb0eea8a706c4c34a16891f84e7b', 'Pengguna'),
+(13, 'Jane Doel', 'Jane', '827ccb0eea8a706c4c34a16891f84e7b', 'Pengguna'),
+(14, 'John Doeloes', 'John', '827ccb0eea8a706c4c34a16891f84e7b', 'Pengguna'),
 (15, 'Falan', 'Falan', 'e10adc3949ba59abbe56e057f20f883e', 'Pengguna');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_requests`
+--
+
+CREATE TABLE `tb_requests` (
+  `id_req` int(20) NOT NULL,
+  `req_msg` varchar(255) NOT NULL,
+  `id_sk` varchar(20) CHARACTER SET latin1 NOT NULL,
+  `req_status` enum('Diterima','Ditolak','Pending') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -163,7 +176,7 @@ CREATE TABLE `tb_reservasi` (
   `tanggal_reservasi` date NOT NULL,
   `status` enum('Pending','Diterima','Ditolak') DEFAULT 'Pending',
   `id_sk` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_reservasi`
@@ -181,9 +194,12 @@ INSERT INTO `tb_reservasi` (`id_reservasi`, `id_anggota`, `id_buku`, `tanggal_re
 (45, 'A012', 'B005', '2024-12-06', 'Diterima', 'S022'),
 (50, 'A003', 'B002', '2024-12-08', 'Diterima', 'S027'),
 (51, 'A001', 'B001', '2024-12-08', 'Diterima', 'S028'),
-(52, 'A012', 'B003', '2024-12-08', 'Ditolak', NULL),
 (55, 'A014', 'B005', '2024-12-08', 'Diterima', 'S029'),
-(56, 'A012', 'B007', '2024-12-08', 'Diterima', 'S030');
+(56, 'A012', 'B007', '2024-12-08', 'Diterima', 'S030'),
+(57, 'A013', 'B006', '2024-12-10', 'Diterima', 'S031'),
+(59, 'A012', 'B001', '2024-12-13', 'Diterima', 'S032'),
+(60, 'A013', 'B001', '2024-12-13', 'Diterima', 'S033'),
+(61, 'A013', 'B003', '2024-12-13', 'Diterima', 'S034');
 
 -- --------------------------------------------------------
 
@@ -199,7 +215,7 @@ CREATE TABLE `tb_sirkulasi` (
   `tgl_kembali` date NOT NULL,
   `status` enum('PIN','KEM') NOT NULL,
   `tgl_dikembalikan` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_sirkulasi`
@@ -212,7 +228,7 @@ INSERT INTO `tb_sirkulasi` (`id_sk`, `id_buku`, `id_anggota`, `tgl_pinjam`, `tgl
 ('S004', 'B002', 'A005', '2020-07-07', '2020-07-28', 'KEM', '2024-12-06'),
 ('S005', 'B001', 'A010', '2024-12-10', '2024-12-17', 'KEM', NULL),
 ('S006', 'B008', 'A013', '2024-12-03', '2024-12-10', 'KEM', '2024-12-04'),
-('S007', 'B002', 'A013', '2024-12-06', '2024-12-13', 'KEM', '2024-12-06'),
+('S007', 'B002', 'A013', '2024-12-06', '2024-12-27', 'KEM', '2024-12-06'),
 ('S008', 'B003', 'A013', '2024-12-06', '2024-12-13', 'KEM', '2024-12-06'),
 ('S009', 'B006', 'A013', '2024-12-06', '2024-12-13', 'KEM', '2024-12-06'),
 ('S010', 'B001', 'A013', '2024-12-06', '2024-12-13', 'KEM', '2024-12-06'),
@@ -235,7 +251,11 @@ INSERT INTO `tb_sirkulasi` (`id_sk`, `id_buku`, `id_anggota`, `tgl_pinjam`, `tgl
 ('S027', 'B002', 'A003', '2024-12-08', '2024-12-15', 'PIN', NULL),
 ('S028', 'B001', 'A001', '2024-12-08', '2024-12-15', 'KEM', '2024-12-08'),
 ('S029', 'B005', 'A014', '2024-12-08', '2024-12-15', 'KEM', '2024-12-08'),
-('S030', 'B007', 'A012', '2024-12-08', '2024-12-15', 'PIN', NULL);
+('S030', 'B007', 'A012', '2024-12-08', '2024-12-17', 'PIN', NULL),
+('S031', 'B006', 'A013', '2024-12-10', '2024-12-17', 'KEM', '2024-12-10'),
+('S032', 'B001', 'A012', '2024-12-13', '2024-12-20', 'PIN', NULL),
+('S033', 'B001', 'A013', '2024-12-13', '2024-12-31', 'PIN', NULL),
+('S034', 'B003', 'A013', '2024-12-13', '2024-12-20', 'KEM', '2024-12-13');
 
 --
 -- Indexes for dumped tables
@@ -267,6 +287,13 @@ ALTER TABLE `tb_buku`
 --
 ALTER TABLE `tb_pengguna`
   ADD PRIMARY KEY (`id_pengguna`);
+
+--
+-- Indexes for table `tb_requests`
+--
+ALTER TABLE `tb_requests`
+  ADD PRIMARY KEY (`id_req`),
+  ADD KEY `req_to_sk` (`id_sk`);
 
 --
 -- Indexes for table `tb_reservasi`
@@ -302,10 +329,16 @@ ALTER TABLE `tb_pengguna`
   MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT for table `tb_requests`
+--
+ALTER TABLE `tb_requests`
+  MODIFY `id_req` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
 -- AUTO_INCREMENT for table `tb_reservasi`
 --
 ALTER TABLE `tb_reservasi`
-  MODIFY `id_reservasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id_reservasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- Constraints for dumped tables
@@ -317,6 +350,12 @@ ALTER TABLE `tb_reservasi`
 ALTER TABLE `log_pinjam`
   ADD CONSTRAINT `log_pinjam_ibfk_1` FOREIGN KEY (`id_anggota`) REFERENCES `tb_anggota` (`id_anggota`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `log_pinjam_ibfk_2` FOREIGN KEY (`id_buku`) REFERENCES `tb_buku` (`id_buku`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_requests`
+--
+ALTER TABLE `tb_requests`
+  ADD CONSTRAINT `req_to_sk` FOREIGN KEY (`id_sk`) REFERENCES `tb_sirkulasi` (`id_sk`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tb_reservasi`
