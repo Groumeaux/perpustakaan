@@ -13,8 +13,6 @@ services:
       - ./images/covers:/var/www/html/images/covers  # Mount the second upload directory
     depends_on:
       - mysql
-    entrypoint: ["/bin/sh", "-c", "dockerize -wait tcp://mysql:3306 -timeout 30s apache2-foreground"]
-
 
   mysql:
     image: mysql:5.7

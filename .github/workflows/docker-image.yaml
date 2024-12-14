@@ -54,4 +54,4 @@ jobs:
     # Step 8: Tear down containers after tests
     - name: Stop and remove containers
       run: |
-        docker-compose down || true
+        docker-compose down

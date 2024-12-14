@@ -7,11 +7,13 @@ RUN docker-php-ext-install mysqli
 # Create two directories for uploads
 RUN mkdir -p /var/www/html/images/profiles /var/www/html/images/covers && \
     chown -R www-data:www-data /var/www/html/images/profiles /var/www/html/images/covers && \
-    chmod -R 755 /var/www/html/images/profiles /var/www/html/images/covers && \
-    chown -R www-data:www-data /var/www/html
+    chmod -R 755 /var/www/html/images/profiles /var/www/html/images/covers
 
 # Copy website files (root folder)
 COPY ./ /var/www/html/
+
+# Ensure Apache has permission to access the files
+RUN chown -R www-data:www-data /var/www/html
 
 # Expose Apache port
 EXPOSE 80
