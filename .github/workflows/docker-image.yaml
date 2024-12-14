@@ -32,7 +32,7 @@ jobs:
     # Step 6: Push Docker image to Docker Hub
     - name: Push Docker image to Docker Hub
       run: |
-        docker push myusername/readbyte-digilib:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/readbyte-digilib:latest
 
     # Step 7: Set up MySQL and PHP-Apache containers using Docker Compose
     - name: Set up MySQL and PHP-Apache containers using Docker Compose
