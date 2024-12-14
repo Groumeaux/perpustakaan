@@ -10,7 +10,13 @@ RUN mkdir -p /var/www/html/images/profiles /var/www/html/images/covers && \
     chmod -R 755 /var/www/html/images/profiles /var/www/html/images/covers
 
 # Copy website files (root folder)
-COPY . /var/www/html/
+COPY ./ /var/www/html/
+
+# Copy website files (root folder)
+      COPY ./data_perpus.sql /docker-entrypoint-initdb.d
+
+# Ensure Apache has permission to access the files
+RUN chown -R www-data:www-data /var/www/html
 
 # Expose Apache port
 EXPOSE 80
