@@ -9,8 +9,8 @@ services:
       - "8080:80"
     volumes:
       - ./www:/var/www/html
-      - ./uploads1:/var/www/html/uploads1  # Mount the first upload directory
-      - ./uploads2:/var/www/html/uploads2  # Mount the second upload directory
+      - ./covers:/var/www/html/images/covers  # Mount the first upload directory
+      - ./profiles:/var/www/html/images/profiles  # Mount the second upload directory
     depends_on:
       - mysql
 
