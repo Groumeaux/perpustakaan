@@ -12,7 +12,7 @@
 <section class="content-header">
     <div class="row" style="display: flex; align-items: center;">
         <div class="col-sm-3">
-            <h1 class="m-0">Profil</h1> 
+            <h1 class="m-0" style="margin-left: 525px;">Profil</h1> 
         </div>
     </div>
 </section>

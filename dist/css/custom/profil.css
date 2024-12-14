@@ -1,0 +1,27 @@
+/* Mengubah warna background panel */
+.panel {
+    background-color: #130F40 !important;
+    color: #f6f6f6 !important;  /* Mengubah warna teks di dalam panel */
+}
+/* Mengubah warna teks untuk setiap elemen di dalam panel */
+.panel-body {
+    color: #f6f6f6 !important;
+}
+/* Mengubah warna tombol Edit */
+.btn-primary {
+    background-color: #7ED6DF !important;
+    border-color: #f6f6f6 !important;
+}
+/* Mengubah warna teks pada tombol Edit */
+.btn-primary a {
+    color: #130F40 !important;
+}
+/* Mengubah warna teks judul */
+.panel-body h3 {
+    color: #7ED6DF !important;
+    font-weight: bold;
+}
+/* Mengubah warna teks label */
+.panel-body p strong {
+    color: #7ED6DF !important;
+}
