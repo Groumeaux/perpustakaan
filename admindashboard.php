@@ -293,6 +293,9 @@ include "inc/koneksi.php";
 						case 'kembali':
 							include "admin/sirkul/kembali.php";
 							break;
+						case 'perpanjang':
+							include "admin/sirkul/perpanjangan.php";
+							break;
 
 							//log
 						case 'log_pinjam':

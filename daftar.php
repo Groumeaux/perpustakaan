@@ -111,10 +111,26 @@ include "inc/koneksi.php";
         // Simpan data ke tabel tb_anggota
         $sql_register = "INSERT INTO tb_anggota (id_anggota, nama, jekel, kelas, no_hp) 
                          VALUES ('$id_baru', '$nama', '$jekel', '$domisili', '$no_hp')";
+        $query_register = mysqli_query($koneksi, $sql_register);
 
-        if (mysqli_query($koneksi, $sql_register)) {
-            // Tampilkan pesan sukses
-            echo "<script>alert('Registrasi berhasil! Silakan login.'); window.location.href='login.php';</script>";
+        // Simpan password ke tabel pengguna
+        $sql_user = "INSERT INTO tb_pengguna (id_pengguna, nama_pengguna, username, password, level)
+                     VALUES (NULL, '$nama', '$username', '$password', 'Pengguna')";
+        $query_user = mysqli_query($koneksi, $sql_user);
+
+        if ($query_register && $query_user) {
+            echo "<script>  
+                Swal.fire({
+                    title: 'Pendaftaran Berhasil!',
+                    text: 'Username Anda adalah $username. Silakan login menggunakan Username dan Password Anda.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.value) {
+                        window.location = 'login.php';
+                    }
+                });
+            </script>";
         } else {
             echo "<script>alert('Registrasi gagal!');</script>";
         }

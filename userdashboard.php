@@ -1,16 +1,29 @@
 <?php
 //Mulai Sesion
 session_start();
+include "inc/koneksi.php";
 if (isset($_SESSION["ses_username"]) == "") {
 	header("location: index.php");
-} else {
+} else {	
+	$data_id_anggota = $_SESSION["ses_id_anggota"];
 	$data_id = $_SESSION["ses_id"];
 	$data_nama = $_SESSION["ses_nama"];
 	$data_user = $_SESSION["ses_username"];
 	$data_level = $_SESSION["ses_level"];
 }
-//KONEKSI DB
-include "inc/koneksi.php";
+if (isset($_GET['edit'])){
+	if ($_GET['edit'] == "edited"){
+		$data_nama = $_SESSION["ses_nama"];
+	}
+
+$ambiluser = mysqli_query($koneksi, "SELECT * FROM tb_anggota WHERE id_anggota = '$data_id_anggota'");
+$userinfo = mysqli_fetch_array($ambiluser);
+if ($userinfo['profile_image'] == "" || $userinfo['profile_image'] == NULL ){
+	$profil = "https://via.placeholder.com/150";
+} else {
+	$profil = "images/profiles/".$userinfo['profile_image'];
+}
+}
 ?>
 
 <!DOCTYPE html>
@@ -112,8 +125,15 @@ include "inc/koneksi.php";
 				<!-- /.search form -->
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu">
-					<li class="header">NAVIGASI UTAMA</li>
-					<!-- Level  -->
+					<li class="header">MAIN NAVIGATION</li>
+						<li class="treeview">
+							<a href="?page=profil">
+								<i class="glyphicon glyphicon-user"></i>
+								<span>Profil User</span>
+								<span class="pull-right-container">
+								</span>
+							</a>
+						</li>
 						<li class="treeview">
 							<a href="?page=katalog">
 								<i class="glyphicon glyphicon-book"></i>
@@ -199,7 +219,19 @@ include "inc/koneksi.php";
                         case 'reservasiuser':
                             include "pengguna/reservasi/data_reservasi.php";
                             break;
+							
+						case 'reservasiuser/perpanjang':
+							include "pengguna/perpanjang.php";
+							break;
                         
+						case 'profil':
+							include "pengguna/profil/profil.php";
+							break;
+
+						case 'profiledit':
+							include "pengguna/profil/profiledit.php";
+							break;
+
                         case 'logout':
                             session_destroy();
                             header("location: logout.php");
@@ -374,6 +406,21 @@ include "inc/koneksi.php";
 				//Initialize Select2 Elements
 				$(".select2").select2();
 			});
+		// Ensure DOM is fully loaded before attaching event listener
+		document.addEventListener('DOMContentLoaded', function() {
+			function previewImage(event) {
+				var reader = new FileReader();
+				console.log(reader);
+				reader.onload = function() {
+					var output = document.getElementById('profileImage');
+					output.src = reader.result;
+				};
+				reader.readAsDataURL(event.target.files[0]);
+				}
+
+			// Attach the previewImage function to the input onchange event
+			document.getElementById('fileInput').addEventListener('change', previewImage);
+		});
 		</script>
 </body>
 

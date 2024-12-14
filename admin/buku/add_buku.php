@@ -42,7 +42,7 @@ if (strlen($tambah) == 1) {
 						<div class="form-group">
 							<label>ID Buku</label>
 							<input type="text" name="id_buku" id="id_buku" class="form-control" value="<?php echo $format; ?>"
-							 readonly/>
+						>
 						</div>
 
 						<div class="form-group">
