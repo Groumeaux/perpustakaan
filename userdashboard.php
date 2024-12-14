@@ -58,6 +58,8 @@ if ($userinfo['profile_image'] == "" || $userinfo['profile_image'] == NULL ){
 
 	<link rel="stylesheet" href="dist/css/custom/popup.css">
 
+	<link rel="stylesheet" href="dist/css/custom/profil.css">
+
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 

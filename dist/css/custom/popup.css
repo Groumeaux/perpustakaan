@@ -10,6 +10,9 @@
     font-weight: bold;
     font-size: 26px !important;
 }
+.swal2-content {
+    color: #f6f6f6 !important; /* Warna teks judul */
+}
 .swal2-icon {
     color: #7ED6DF !important; /* Warna ikon centang atau error */
 }
