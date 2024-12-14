@@ -1,0 +1,158 @@
+/* Styling umum */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.container-fullscreen {
+    height: 100vh;
+    width: 100vw;
+    background-image: url('bgweb.png');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    overflow: hidden;
+}/* Styling untuk kolom kiri (welcome text) */
+
+.left-column {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+}
+
+.welcome-text {
+    font-size: 15em;
+    color: #7ED6DF;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.left-column h2 {
+    font-size: 2.5em;
+    color: #F4F4F4;
+    margin-top: 0;
+}/* Styling untuk kolom kanan (Register Box) */
+
+.right-column {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-box {
+    width: 100%;
+    max-width: 400px;
+    background-color: #130F40;
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.register-box .login-logo {
+    text-align: center;
+}
+
+.register-box-body {
+    text-align: center;
+    background-color: #130F40;
+    backdrop-filter: blur(10px);
+}
+
+.register-box-msg {
+    font-size: 15px;
+    font-weight: bold;
+    color: #f4f4f4;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    width: 100%;
+    background-color: #130F40;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.form-group.has-feedback input.form-control {
+    border-bottom: 2px solid #130F40;
+}
+
+.form-control:focus {
+    background-color: #130F40;
+    color: #fff;
+    border-bottom: 2px solid #130F40;
+    box-shadow: none;
+}
+.btn-success {
+    background-color: #7ED6DF !important;
+    color: #130F40 !important;
+    border-color: #7ED6DF !important;
+}
+.btn-success:hover {
+    background-color: #63c4c6 !important;
+    color: #130F40 !important;
+}
+.btn-flat:pressed {
+    background-color: #63c4c6 !important;
+    color: #130F40 !important;
+}
+.login-logo h3 {
+    color: #7ED6DF;
+}/* Responsif untuk ukuran layar kecil */
+
+@media (max-width: 768px) {
+    
+    .container-fullscreen {
+        flex-direction: column;
+        justify-content: flex-start;
+        height: auto;
+        overflow-y: auto;
+    }    
+    
+    .left-column {
+        padding: 20px;
+    }    
+    
+    .right-column {
+        width: 100%;
+        margin-top: 20px;
+    }    
+    
+    .register-box {
+        width: 90%;
+        max-width: 350px;
+    }    
+    
+    .welcome-text {
+        font-size: 8em;
+    }    
+    
+    .left-column h2 {
+        font-size: 1.5em;
+    }    
+    
+    .register-logo h3 {
+        font-size: 18px;
+    }    
+    
+    .form-group {
+        margin-bottom: 15px;
+    }    
+    
+    .row {
+        padding-top: 10px;
+    }
+}

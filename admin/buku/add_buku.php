@@ -21,7 +21,7 @@ if (strlen($tambah) == 1) {
 		<li>
 			<a href="index.php">
 				<i class="fa fa-home"></i>
-				<b>Si Perpustakaan</b>
+				<b>HOME</b>
 			</a>
 		</li>
 	</ol>

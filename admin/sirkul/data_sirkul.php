@@ -1,13 +1,12 @@
 <section class="content-header">
 	<h1>
-		Sirkulasi
-		<small>Buku</small>
+		Sirkulasi Buku
 	</h1>
 	<ol class="breadcrumb">
 		<li>
 			<a href="index.php">
 				<i class="fa fa-home"></i>
-				<b>Si Perpustakaan</b>
+				<b>HOME</b>
 			</a>
 		</li>
 	</ol>

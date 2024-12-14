@@ -1,0 +1,29 @@
+/* CSS untuk mengubah warna kotak pop-up dan elemen lainnya */
+.swal2-popup {
+    background-color: #130F40 !important; /* Warna latar belakang kotak pop-up */
+    color: #7ED6DF !important; /* Warna teks di dalam pop-up */
+    border-radius: 20px; /* Membuat sudut kotak pop-up lebih lembut */
+    border: 2px solid #7ED6DF !important; /* Menambahkan border berwarna #7ED6DF */
+}
+.swal2-title {
+    color: #7ED6DF !important; /* Warna teks judul */
+    font-weight: bold;
+    font-size: 26px !important;
+}
+.swal2-icon {
+    color: #7ED6DF !important; /* Warna ikon centang atau error */
+}
+.swal2-confirm {
+    background-color: #7ED6DF !important; /* Warna background tombol "OK" */
+    color: #130F40 !important; /* Warna teks tombol "OK" */
+    border-radius: 5px;
+    font-size: 16px !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+}
+.swal2-confirm:hover {
+    background-color: #63c4c6 !important; /* Warna tombol saat hover */
+    color: #130F40 !important;
+}

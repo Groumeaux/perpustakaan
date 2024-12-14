@@ -8,7 +8,7 @@ include "inc/koneksi.php";
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Register | SI Perpustakaan</title>
+    <title>Register | ReadByte</title>
     <link rel="icon" href="dist/img/logo.png">
     <!-- Responsive -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -20,52 +20,63 @@ include "inc/koneksi.php";
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+
+	<link rel="stylesheet" href="dist/css/custom/daftar.css">
+
+	<link rel="stylesheet" href="dist/css/custom/popup.css">
+
     <!-- SweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 
 <body class="hold-transition register-page">
-    <div class="register-box">
-        <div class="register-logo">
-            <h3>
-                <font color="green"><b>Form Pendaftaran</b></font>
-            </h3>
+    <div class="container-fullscreen">
+        <div class="left-column">
+            <h1 class="welcome-text">Halo!</h1>
+            <h2><b>Selamat Datang di ReadByte</b></h2>
         </div>
-        <!-- Form Pendaftaran -->
-        <div class="register-box-body">
-            <form action="#" method="post">
-                <div class="form-group has-feedback">
-                    <input type="text" class="form-control" name="nama" placeholder="Nama Lengkap" required>
-                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        <div class="right-column">
+            <div class="register-box">
+                <div class="login-logo">
+                    <h3><b>Form Pendaftaran</b></h3>
                 </div>
-                <div class="form-group">
-                    <select class="form-control" name="jekel" required>
-                        <option value="" selected disabled>Jenis Kelamin</option>
-                        <option value="Laki-laki">Laki-laki</option>
-                        <option value="Perempuan">Perempuan</option>
-                    </select>
+                <div class="register-box-body">
+                    <p class="register-box-msg">Pendaftaran Akun Baru</p>
+                    <form action="#" method="post">
+                        <div class="form-group has-feedback">
+                            <input type="text" class="form-control" name="nama" placeholder="Nama Lengkap" required>
+                            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" name="jekel" required>
+                                <option value="" selected disabled>Jenis Kelamin</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <input type="text" class="form-control" name="domisili" placeholder="Domisili (Kota)" required>
+                            <span class="glyphicon glyphicon-home form-control-feedback"></span>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <input type="text" class="form-control" name="no_hp" placeholder="Nomor HP" required>
+                            <span class="glyphicon glyphicon-phone form-control-feedback"></span>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <input type="password" class="form-control" name="password" placeholder="Password" required>
+                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-8"></div>
+                            <div class="col-xs-4">
+                                <button type="submit" class="btn btn-success btn-block btn-flat" name="btnRegister">
+                                    <b>Daftar</b>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-group has-feedback">
-                    <input type="text" class="form-control" name="domisili" placeholder="Domisili (Kota)" required>
-                    <span class="glyphicon glyphicon-home form-control-feedback"></span>
-                </div>
-                <div class="form-group has-feedback">
-                    <input type="text" class="form-control" name="no_hp" placeholder="Nomor HP" required>
-                    <span class="glyphicon glyphicon-phone form-control-feedback"></span>
-                </div>
-                <div class="form-group has-feedback">
-                    <input type="password" class="form-control" name="password" placeholder="Password" required>
-                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                </div>
-                <div class="row">
-                    <div class="col-xs-8"></div>
-                    <div class="col-xs-4">
-                        <button type="submit" class="btn btn-success btn-block btn-flat" name="btnRegister">
-                            <b>Daftar</b>
-                        </button>
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 
@@ -93,42 +104,19 @@ include "inc/koneksi.php";
             $id_baru = "A001";
         }
 
-
+        // Username berdasarkan nama depan
         $array_nama = explode(" ", $nama);
         $username = $array_nama[0];
 
         // Simpan data ke tabel tb_anggota
         $sql_register = "INSERT INTO tb_anggota (id_anggota, nama, jekel, kelas, no_hp) 
                          VALUES ('$id_baru', '$nama', '$jekel', '$domisili', '$no_hp')";
-        $query_register = mysqli_query($koneksi, $sql_register);
-    
-        // Simpan password ke tabel pengguna
-        $sql_user = "INSERT INTO tb_pengguna (id_pengguna, nama_pengguna, username, password, level)
-                     VALUES (NULL, '$nama', '$username', '$password', 'Pengguna')";
-        $query_user = mysqli_query($koneksi, $sql_user);
 
-        if ($query_register && $query_user) {
-            echo "<script>  
-                Swal.fire({
-                    title: 'Pendaftaran Berhasil!',
-                    text: 'Username Anda adalah $username. Silakan login menggunakan Username dan Password Anda.',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                }).then((result) => {
-                    if (result.value) {
-                        window.location = 'login.php';
-                    }
-                });
-            </script>";
+        if (mysqli_query($koneksi, $sql_register)) {
+            // Tampilkan pesan sukses
+            echo "<script>alert('Registrasi berhasil! Silakan login.'); window.location.href='login.php';</script>";
         } else {
-            echo "<script>
-                Swal.fire({
-                    title: 'Pendaftaran Gagal!',
-                    text: 'Terjadi kesalahan, coba lagi.',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
-            </script>";
+            echo "<script>alert('Registrasi gagal!');</script>";
         }
     }
     ?>

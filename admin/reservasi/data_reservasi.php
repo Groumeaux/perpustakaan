@@ -22,14 +22,13 @@ if (isset($_GET['page']) && $_GET['page'] == 'ubah_status') {
 
 <section class="content-header">
     <h1>
-        Reservasi
-        <small>Admin</small>
+        Reservasi Admin
     </h1>
     <ol class="breadcrumb">
         <li>
             <a href="index.php">
                 <i class="fa fa-home"></i>
-                <b>Si Perpustakaan</b>
+                <b>HOME</b>
             </a>
         </li>
     </ol>

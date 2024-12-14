@@ -8,7 +8,7 @@ include "inc/koneksi.php";
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Login | SI Perpustakaan</title>
+	<title>Login | ReadByte</title>
 	<link rel="icon" href="dist/img/logo.png">
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -21,6 +21,9 @@ include "inc/koneksi.php";
 	<!-- Theme style -->
 	<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
 
+	<link rel="stylesheet" href="dist/css/custom/login.css">
+	<link rel="stylesheet" href="dist/css/custom/popup.css">
+
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -30,61 +33,55 @@ include "inc/koneksi.php";
 </head>
 
 <body class="hold-transition login-page">
-	<div class="login-box">
-		<div class="login-logo">
-			<h3>
-				<font color="green">
-					<b>Sistem Informasi Perpustakaan</b>
-				</font>
-			</h3>
-			</a>
-		</div>
-		<!-- /.login-logo -->
-		<div class="login-box-body">
-			<center>
-				<img src="dist/img/logo.png" width=160px />
-			</center>
-			<br>
-			<p class="login-box-msg">Login System</p>
-			<form action="#" method="post">
-				<div class="form-group has-feedback">
-					<input type="text" class="form-control" name="username" placeholder="Username" required>
-					<span class="glyphicon glyphicon-user form-control-feedback"></span>
-				</div>
-				<div class="form-group has-feedback">
-					<input type="password" class="form-control" name="password" placeholder="Password" required>
-					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
-				</div>
-				<div class="row">
-					<div class="col-xs-4 col-md-offset-4 text-center">
-						<button type="submit" class="btn btn-success btn-block btn-flat" name="btnLogin" title="Masuk Sistem">
-							<b>Masuk</b>
-						</button>
-					</div>
-				</div>
-				<div class="row" style="padding-top: 15px;">
-					<div class="col-md-10 col-md-offset-1 text-center">
-						<p style="opacity: 0.5 ;color: gray; font-size: 14px;">
-							Belum mempunyai akun?<a href="daftar.php" style="color: blue; text-decoration: underline;">Daftar disini!</a>
-						</p>
-					</div>
-				</div>
-			</form>
-		</div>
-		<!-- /.login-box-body -->
-	</div>
-	<!-- /.login-box -->
+    <div class="container-fullscreen">
+        <div class="left-column">
+            <h1 class="welcome-text">Halo!</h1>
+            <h2><b>Selamat Datang di ReadByte</b></h2>
+        </div>
+        <div class="right-column">
+            <div class="login-box">
+                <div class="login-logo">
+                    <h3><b>Log In ke ReadByte</b></h3>
+                </div>
+                <div class="login-box-body">
+                    <center>
+                        <img src="dist/img/logo.png" width="200px" />
+                    </center>
+                    <br>
+                    <p class="login-box-msg">Sistem Login</p>
+                    <form action="#" method="post">
+                        <div class="form-group has-feedback">
+                            <input type="text" class="form-control" name="username" placeholder="Username" required>
+                            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <input type="password" class="form-control" name="password" placeholder="Password" required>
+                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4 col-md-offset-4 text-center">
+                                <button type="submit" class="btn btn-success btn-block btn-flat" name="btnLogin" title="Masuk Sistem">
+                                    <b>Login</b>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top: 15px;">
+                            <div class="col-md-10 col-md-offset-1 text-center">
+                                <p style="color: #7ED6DF; font-size: 12px;">
+                                    Belum mempunyai akun? <a href="daftar.php" style="color: #7ED6DF";>Daftar disini!</a>
+                                </p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<!-- jQuery 2.2.3 -->
-	<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
-	<!-- Bootstrap 3.3.6 -->
-	<script src="bootstrap/js/bootstrap.min.js"></script>
-	<!-- iCheck -->
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-	<!-- sweet alert -->
+    <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
-
-	
 </body>
 
 </html>

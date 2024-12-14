@@ -1,0 +1,150 @@
+/* Menghapus sidebar dan mengatur lebar konten */
+.main-sidebar {
+    display: none;
+}
+.wrapper {
+    display: block;
+}
+.main-header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000; /* Pastikan header tetap di atas konten lainnya */
+}
+/* Navbar custom */
+.navbar-custom-menu {
+    margin-left: auto;
+}
+.sidebar-toggle {
+    display: none;
+}
+/* Menyesuaikan footer agar memenuhi lebar layar */
+.main-footer {
+    margin-left: 0 !important;
+    width: 100%;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    background: #130F40;
+    color: #f6f6f6;
+    border-top: 1px solid #130F40;
+    text-align: center;
+}
+.main-footer a {
+    color: #7ED6DF !important;
+}
+/* Responsif untuk footer */
+@media (max-width: 768px) {
+    .main-footer {
+        text-align: center;
+    }
+}
+/* Mengubah warna latar belakang logo */
+.main-header .logo {
+    background-color: #130F40 !important;
+    color: #ffffff; /* Menyesuaikan warna teks jika diperlukan */
+    display: flex;
+    align-items: center;
+    height: 65px; /* Sesuaikan dengan tinggi navbar */
+}
+/* Opsional: Menyesuaikan logo text */
+.main-header .logo-lg b {
+    color: #ffffff; /* Pastikan teks logo terlihat dengan baik di latar belakang baru */
+}
+/* Menyesuaikan tombol di navbar */
+.navbar-custom-menu .btn {
+    background-color: #7ED6DF !important;
+    color: #130F40 !important;
+    border: 0px solid !important;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 12px;
+    padding: 4px 8px;
+    border-radius: 5px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    height: 40px; /* Sesuaikan dengan tinggi navbar */
+}
+/* Menghapus border radius untuk tombol agar konsisten dengan btn-flat */
+.btn-flat {
+    border-radius: 0;
+}
+/* Menghapus link underline pada tombol */
+.navbar-custom-menu .btn {
+    text-decoration: none;
+    color: inherit; /* Menjaga warna teks tetap sesuai */
+}
+/* Menyesuaikan ikon dan teks dalam tombol */
+.navbar-custom-menu .btn i {
+    margin-right: 5px;
+}
+/* Menghilangkan padding default pada ul.navbar-nav untuk tombol */
+.navbar-custom-menu ul.navbar-nav {
+    align-items: center;
+    display: flex;
+}
+/* Section Baru: Welcome Section */
+.welcome-section {
+    background-image: url('bgHome1.png'); /* Pastikan path gambar sesuai */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding: 60px 0; /* Padding atas dan bawah */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #ffffff; /* Warna teks */
+    height: 100vh;
+}
+.welcome-content {
+    padding: 20px;
+    border-radius: 10px;
+}
+.welcome-content img {
+    max-width: 220px;
+    height: auto;
+    margin-bottom: 10px;
+}
+.welcome-content h1 {
+    font-size: 120px;
+    margin-bottom: 10px;
+    font-family: 'Konstarica', sans-serif;
+    color: #7ED6DF;
+}
+.welcome-content p {
+    font-size: 15px;
+}
+/* Responsif untuk Welcome Section */
+@media (max-width: 768px) {
+    .welcome-content h1 {
+        font-size: 28px;
+    }
+    .welcome-content p {
+        font-size: 18px;
+    }
+    .welcome-content img {
+        max-width: 80px;
+    }
+}
+/* Menyesuaikan konten agar tidak tersembunyi di bawah footer */
+.content-wrapper {
+    margin-left: 0 !important; /* Menghilangkan margin untuk mengisi seluruh lebar layar */
+    padding: 20px; /* Menambah padding untuk konten */
+    padding-top: 60px; /* Menyesuaikan dengan tinggi header dan welcome-section */
+    padding-bottom: 60px; /* Menyesuaikan dengan tinggi footer */
+    background-image: url('bgweb.png');  /* Pastikan path gambar sesuai dengan gambar yang ada */
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    color: #f6f6f6;
+}
+/* Mengubah font seluruh halaman menjadi Konstarrica */
+@font-face {
+    font-family: 'Konstarica';
+    src: url('dist/fonts/Konstarica.woff2') format('woff2'),
+         url('dist/fonts/Konstarica.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

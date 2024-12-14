@@ -10,14 +10,13 @@ $id_reservasi = str_pad($tambah, 9, "0", STR_PAD_LEFT);
 
 <section class="content-header">
     <h1>
-        Reservasi
-        <small>Buku</small>
+        Reservasi Buku
     </h1>
     <ol class="breadcrumb">
         <li>
             <a href="index.php">
                 <i class="fa fa-home"></i>
-                <b>Si Perpustakaan</b>
+                <b>HOME</b>
             </a>
         </li>
     </ol>

@@ -6,7 +6,7 @@
 		<li>
 			<a href="index.php">
 				<i class="fa fa-home"></i>
-				<b>Si Perpustakaan</b>
+				<b>HOME</b>
 			</a>
 		</li>
 	</ol>
@@ -17,8 +17,8 @@
 		<div class="box-header with-border">
 			<a href="?page=MyApp/add_agt" title="Tambah Data" class="btn btn-primary">
 				<i class="glyphicon glyphicon-plus"></i> Tambah Data</a>
-			<a href="?page=MyApp/print_allagt" title="Print" class="btn btn-success" stlye="color : green;">
-				<i class="glyphicon glyphicon-print"></i>Print</a>
+			<a href="?page=MyApp/print_allagt" title="Print" class="btn btn-success" stlye="color : blue;">
+				<i class="glyphicon glyphicon-print"></i> Print</a>
 		</div>
 		<!-- /.box-header -->
 		<div class="box-body">

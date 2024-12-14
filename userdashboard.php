@@ -19,7 +19,7 @@ include "inc/koneksi.php";
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>SI PERPUSTAKAAN</title>
+	<title>Pengguna | ReadByte</title>
 	<link rel="icon" href="dist/img/logo.png">
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -37,14 +37,18 @@ include "inc/koneksi.php";
 	<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
 	<!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-	<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+	<link rel="stylesheet" href="dist/css/skin-blue.min.css">
 	<!-- css for the book cards -->
 	<link rel="stylesheet" href="dist/css/catalogue_style.css">
+
+	<link rel="stylesheet" href="dist/css/custom/userdashboard.css">
+
+	<link rel="stylesheet" href="dist/css/custom/popup.css">
 
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 
-<body class="hold-transition skin-green sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini">
 	<!-- Site wrapper -->
 	<div class="wrapper">
 
@@ -53,7 +57,7 @@ include "inc/koneksi.php";
 			<a href="index.php" class="logo">
 				<span class="logo-lg">
 					<img src="dist/img/logo.png" width="37px">
-					<b>E-Library</b>
+					<b>ReadByte</b>
 				</span>
 			</a>
 			<!-- Header Navbar: style can be found in header.less -->
@@ -73,7 +77,7 @@ include "inc/koneksi.php";
 							<a class="dropdown-toggle">
 								<span>
 									<b>
-										Sistem Informasi Perpustakaan Berbasis Web V 1.0
+										Perpustakaan Digital ReadByte v1.0.0
 									</b>
 								</span>
 							</a>
@@ -108,7 +112,7 @@ include "inc/koneksi.php";
 				<!-- /.search form -->
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu">
-					<li class="header">MAIN NAVIGATION</li>
+					<li class="header">NAVIGASI UTAMA</li>
 					<!-- Level  -->
 						<li class="treeview">
 							<a href="?page=katalog">

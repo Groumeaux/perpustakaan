@@ -52,7 +52,7 @@
 
 		<div class="col-lg-3 col-xs-6">
 			<!-- small box -->
-			<div class="small-box bg-blue">
+			<div class="small-box">
 				<div class="inner">
 					<h4>
 						<?= $buku; ?>
@@ -71,7 +71,7 @@
 
 		<div class="col-lg-3 col-xs-6">
 			<!-- small box -->
-			<div class="small-box bg-yellow">
+			<div class="small-box">
 				<div class="inner">
 					<h4>
 						<?= $agt; ?>
@@ -90,7 +90,7 @@
 
 		<div class="col-lg-3 col-xs-6">
 			<!-- small box -->
-			<div class="small-box bg-green">
+			<div class="small-box">
 				<div class="inner">
 					<h4>
 						<?= $pin; ?>
@@ -109,7 +109,7 @@
 
 		<div class="col-lg-3 col-xs-6">
 			<!-- small box -->
-			<div class="small-box bg-red">
+			<div class="small-box">
 				<div class="inner">
 					<h4>
 						<?= $kem; ?>

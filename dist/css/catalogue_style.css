@@ -105,3 +105,8 @@
 .book-overlay button {
     margin-top: 20px;
 }
+
+.btn-success {
+    background-color: #3b8ab8 !important; /* Warna tombol */
+    border-color: #3b8ab8 !important;    /* Warna border */
+}

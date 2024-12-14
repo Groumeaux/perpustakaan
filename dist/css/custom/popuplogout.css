@@ -1,0 +1,46 @@
+/* CSS untuk pop-up, ambil dari yang sudah Anda buat */
+body{
+    background-image: url('bgweb.png');
+}
+.swal2-popup {
+    background-color: #130F40 !important;
+    color: #7ED6DF !important;
+    border-radius: 10px;
+    border: 2px solid #7ED6DF !important;
+    font-size: 16px !important;
+}
+.swal2-title {
+    color: #7ED6DF !important;
+    font-weight: bold;
+    font-size: 26px !important;
+}
+.swal2-confirm {
+    background-color: #7ED6DF !important;
+    color: #130F40 !important;
+    border-radius: 5px;
+    font-size: 16px !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+    border: 2px solid #222d32 !important;
+}
+.swal2-confirm:hover {
+    background-color: #63c4c6 !important;
+    color: #130F40 !important;
+}
+.swal2-cancel {
+    background-color: #222d32 !important;
+    color: #f6f6f6 !important;
+    border-radius: 5px;
+    font-size: 16px !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+    border: 2px solid #7ED6DF !important;
+}
+.swal2-cancel:hover {
+    background-color: #63c4c6 !important;
+    color: #130F40 !important;
+}
