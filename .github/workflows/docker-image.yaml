@@ -27,17 +27,17 @@ jobs:
     # Build the Docker image
     - name: Build Docker Image
       run: |
-        docker build -t ReadByte-DigiLib:${{ github.sha }} .
+        docker build -t readbyte-digilib:${{ github.sha }} .
 
     # Test the container
     - name: Test Container
       run: |
-        docker run -d --name ReadByte-DigiLib -p 8080:80 ReadByte-DigiLib:${{ github.sha }}
+        docker run -d --name readbyte-digilib -p 8080:80 readbyte-digilib:${{ github.sha }}
         sleep 20 # Give services time to start
-        curl -f http://localhost:8080 || (docker logs ReadByte-DigiLib && exit 1)
+        curl -f http://localhost:8080 || (docker logs readbyte-digilib && exit 1)
 
     # Push the Docker image to Docker Hub
     - name: Push Docker Image to Docker Hub
       run: |
-        docker tag ReadByte-DigiLib:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/ReadByte-DigiLib:latest
-        docker push ${{ secrets.DOCKER_USERNAME }}/ReadByte-DigiLib:latest
+        docker tag readbyte-digilib:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/readbyte-digilib:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/readbyte-digilib:latest
