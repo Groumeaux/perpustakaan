@@ -19,7 +19,7 @@ RUN mkdir -p /var/www/html/images/profiles && \
     chmod -R 755 /var/www/html/images/profiles
 
 # Copy website files to the Apache root
-COPY . /var/www/html
+COPY ./ /var/www/html
 
 # Copy the SQL dump file
 COPY ./data_perpus.sql /docker-entrypoint-initdb.d/data_perpus.sql
