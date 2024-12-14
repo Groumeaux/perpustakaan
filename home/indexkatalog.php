@@ -41,7 +41,7 @@
                         $cover = "images/covers/".$data['cover'];
                     }
                     if ($data['jml_buku'] > 0){
-                        $available = '<div class="availability-banner">Available</div>';
+                        $available = '<div class="availability-banner" style="background-color: #1a285d;>Available</div>';
                         $disablecard = '';
                         $jumlahbuku = $data['jml_buku'];
                     } else {
