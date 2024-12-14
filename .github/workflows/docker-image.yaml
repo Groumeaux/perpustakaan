@@ -49,7 +49,7 @@ jobs:
     - name: Test if MySQL and PHP-Apache are running
       run: |
         docker-compose ps 
-        curl http://localhost/index.php
+        curl http://localhost:8080/perpustakaan/index.php
 
     # Step 9: Tear down containers after tests
     - name: Stop and remove containers
