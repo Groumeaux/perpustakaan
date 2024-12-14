@@ -2,15 +2,19 @@ version: '3.7'
 
 services:
   php-apache:
-    image: ${{ secrets.DOCKER_USERNAME }}/readbyte-digilib:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8080:80"
     volumes:
       - ./:/var/www/html
-      - ./images/covers:/var/www/html  # Mount the first upload directory
-      - ./images/profiles:/var/www/html  # Mount the second upload directory
+      - ./images/profiles:/var/www/html/images/profiles  # Mount the first upload directory
+      - ./images/covers:/var/www/html/images/covers  # Mount the second upload directory
     depends_on:
       - mysql
+    entrypoint: ["/bin/sh", "-c", "dockerize -wait tcp://mysql:3306 -timeout 30s apache2-foreground"]
+
 
   mysql:
     image: mysql:5.7
@@ -22,4 +26,4 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./:/docker-entrypoint-initdb.d
+      - ./data_perpus.sql:/docker-entrypoint-initdb.d/data_perpus.sql
