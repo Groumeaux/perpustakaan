@@ -10,7 +10,7 @@ RUN mkdir -p /var/www/html/images/profiles /var/www/html/images/covers && \
     chmod -R 755 /var/www/html/images/profiles /var/www/html/images/covers
 
 # Copy website files (root folder)
-COPY . /var/www/html/
+COPY ./ /var/www/html/
 
 # Expose Apache port
 EXPOSE 80
