@@ -49,7 +49,7 @@ jobs:
     - name: Test if MySQL and PHP-Apache are running
       run: |
         docker-compose ps
-        until curl -s http://localhost:8080/index.php; do echo "Waiting for server to be up..."; sleep 5; done
+        curl http://localhost:8080/index.php
 
     # Step 8: Tear down containers after tests
     - name: Stop and remove containers
