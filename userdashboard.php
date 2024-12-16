@@ -15,21 +15,18 @@ if (isset($_GET['edit'])){
 	if ($_GET['edit'] == "edited"){
 		$data_nama = $_SESSION["ses_nama"];
 	}
-
-	$ambiluser = mysqli_query($koneksi, "SELECT * FROM tb_anggota WHERE id_anggota = '$data_id_anggota'");
-	$userinfo = mysqli_fetch_array($ambiluser);
-	if ($userinfo['profile_image'] == "" || $userinfo['profile_image'] == NULL ){
-		$profil = "https://via.placeholder.com/150";
-	} else {
-		$profil = "images/profiles/".$userinfo["profile_image"];
-	}
 }
 	$ambiluser = mysqli_query($koneksi, "SELECT * FROM tb_anggota WHERE id_anggota = '$data_id_anggota'");
 	$userinfo = mysqli_fetch_array($ambiluser);
-	if ($userinfo['profile_image'] == "" || $userinfo['profile_image'] == NULL ){
-		$profil = "https://via.placeholder.com/150";
+	if ($userinfo['profile_image'] == "" || $userinfo['profile_image'] == NULL){
+		$profil = "dist/img/avatar.png";
 	} else {
 		$profil = "images/profiles/".$userinfo["profile_image"];
+		if (file_exists($profil)) {
+			$profil = "images/profiles/".$userinfo["profile_image"];
+		} else {
+			$profil = "dist/img/avatar.png";
+		}
 	}
 ?>
 

@@ -4,8 +4,13 @@
     if ($user['profile_image'] == "" || $user['profile_image'] == NULL ){
         $profileimage = "https://via.placeholder.com/150";
     } else {
-        $profileimage = "images/profiles/".$user['profile_image'];
-    }
+      $profileimage = "images/profiles/".$user['profile_image'];
+      if (file_exists($profileimage)) {
+        $profileimage = "images/profiles/".$userinfo["profile_image"];
+      } else {
+        $profileimage = "dist/img/avatar.png";
+      }
+  }
 ?>
 
 

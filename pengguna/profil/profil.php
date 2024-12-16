@@ -2,9 +2,14 @@
     $ambiluser = mysqli_query($koneksi, "SELECT * FROM tb_anggota WHERE id_anggota = '$data_id_anggota'");
     $user = mysqli_fetch_array($ambiluser);
     if ($user['profile_image'] == "" || $user['profile_image'] == NULL ){
-        $profileimage = "https://via.placeholder.com/150";
+        $profileimage = "dist/img/avatar.png";
     } else {
         $profileimage = "images/profiles/".$user['profile_image'];
+        if (file_exists($profileimage)) {
+          $profileimage = "images/profiles/".$userinfo["profile_image"];
+        } else {
+          $profileimage = "dist/img/avatar.png";
+        }
     }
 ?>
 
