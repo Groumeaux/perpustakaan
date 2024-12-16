@@ -56,7 +56,7 @@ include "inc/koneksi.php";
             <!-- Logo -->
             <a href="index.php" class="logo">
                 <span class="logo-lg">
-                    <img src="dist/img/Logo.png" width="37px" alt="Logo ReadByte">
+                    <img src="dist/img/logo.png" width="37px" alt="Logo ReadByte">
                 </span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
