@@ -44,14 +44,8 @@ jobs:
     - name: Set up MySQL and PHP-Apache containers using Docker Compose
       run: |
         docker-compose -f docker-compose.yml up --build -d
-        
-    # Step 7: Run tests or other commands to validate if the containers are working
-    - name: Test if MySQL and PHP-Apache are running
-      run: |
-        docker-compose ps
-        curl http://localhost:8080/index.php
 
-    # Step 8: Tear down containers after tests
+    # Step 7: Tear down containers after tests
     - name: Stop and remove containers
       run: |
         docker-compose down

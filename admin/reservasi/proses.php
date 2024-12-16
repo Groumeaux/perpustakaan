@@ -48,6 +48,9 @@ if (isset($_GET['kode']) && isset($_GET['status'])) {
             // Buat data di tabel tb_sirkulasi
             $sql_simpan = $koneksi->query("INSERT INTO tb_sirkulasi (id_sk, id_buku, id_anggota, tgl_pinjam, status, tgl_kembali) 
                 VALUES ('$idsk', '$idbuku', '$idanggota', '$tgl_pinjam', 'PIN', '$tgl_kembali')");
+            
+            $sql_pinjam = $koneksi->query("INSERT INTO log_pinjam (id_buku, id_anggota, tgl_pinjam) 
+                VALUES ('$idbuku', '$idanggota', '$tgl_pinjam')");
 
             // Update jumlah buku di tb_buku
             $update_buku = $koneksi->query("UPDATE tb_buku SET jml_buku = '$jumlahbuku' WHERE id_buku='$idbuku'");
@@ -68,7 +71,7 @@ if (isset($_GET['kode']) && isset($_GET['status'])) {
             }
         } else {
             echo "<script>
-                    alert('Jumlah buku tidak tersedia.');
+                    alert('Buku sudah tidak tersedia!');
                     window.location.href='../../admindashboard.php?page=MyApp/datareservasi';
                 </script>";
         }

@@ -74,6 +74,7 @@
                                 <!-- Tanggal pengembalian -->
                                 <td>
                                     <?php
+
                                     if (isset($ambilreq['req_status'])){
                                         $status = $ambilreq['req_status'];
                                     } else {
@@ -84,27 +85,22 @@
                                     } else {
                                         $status_sirkul = "";
                                     }
+                                    
                                     if ($tgl_kembali && $status != "Pending" && $ambilreq['status'] != "KEM") {
                                         echo date("d/M/Y", strtotime($tgl_kembali));
-                                        
                                         $diff = (strtotime($tgl_kembali) - strtotime($today)) / (60 * 60 * 24);
-
                                         if ($diff == 0 && $data['status'] == "Diterima") {
                                             $jatuhtempo = TRUE;
-                                            echo "<span style='color: red; font-weight: bold;'> (Sudah Jatuh Tempo!)</span>";
                                         }
                                         elseif ($diff > 0 && $diff <= 365 && $data['status'] == "Diterima") {
                                             $jatuhtempo = TRUE;
-                                            echo "<span style='color: orange; font-weight: bold;'> (Jatuh Tempo " . $diff . " Hari Lagi!)</span>";
                                         }
                                         elseif ($diff < 0 && $data['status'] == "Diterima") {
                                             $jatuhtempo = TRUE;
-                                            echo "<span style='color: red; font-weight: bold;'> (Sudah Lewat Jatuh Tempo!)</span>";
                                         }
                                     } elseif ($status == "Pending"  && $ambilreq['status'] != "KEM"){
                                         $jatuhtempo = FALSE;
                                         echo date("d/M/Y", strtotime($tgl_kembali)); 
-                                        echo "<span style='color: gray; font-weight: bold;'> (Menunggu persetujuan perpanjangan...)</span>";
                                     } elseif ($status_sirkul == "KEM"){
                                         echo date("d/M/Y", strtotime($tgl_kembali)); 
                                         $jatuhtempo = FALSE;
@@ -169,8 +165,41 @@
                                     <?php 
                                         if ($bukukembali){
                                             echo "<span style='color: blue; font-weight: bold;'>Dikembalikan(". date("d/M/Y", strtotime($tgl_dikembalikan)) .") </span>";
+                                        } elseif ($data['status'] == "Pending") {
+                                            echo "<span style='color: gray; font-weight: bold;'>".$data['status']."(Menunggu persetujuan admin...)</span>";
                                         } else {
-                                            echo "<span style='color: gray; font-weight: bold;'>".$data['status']."</span>";
+                                            if (isset($ambilreq['req_status'])){
+                                                $status = $ambilreq['req_status'];
+                                            } else {
+                                                $status = "";
+                                            }
+                                            if (isset($ambilreq['status'])){
+                                                $status_sirkul = $ambilreq['status'];
+                                            } else {
+                                                $status_sirkul = "";
+                                            }
+                                            if ($tgl_kembali && $status != "Pending" && $ambilreq['status'] != "KEM") {
+                                                $diff = (strtotime($tgl_kembali) - strtotime($today)) / (60 * 60 * 24);
+        
+                                                if ($diff == 0 && $data['status'] == "Diterima") {
+                                                    $jatuhtempo = TRUE;
+                                                    echo "<span style='color: red; font-weight: bold;'> (Sudah Jatuh Tempo!)</span>";
+                                                }
+                                                elseif ($diff > 0 && $diff <= 365 && $data['status'] == "Diterima") {
+                                                    $jatuhtempo = TRUE;
+                                                    echo "<span style='color: orange; font-weight: bold;'> (Jatuh Tempo " . $diff . " Hari Lagi!)</span>";
+                                                }
+                                                elseif ($diff < 0 && $data['status'] == "Diterima") {
+                                                    $jatuhtempo = TRUE;
+                                                    echo "<span style='color: red; font-weight: bold;'> (Sudah Lewat Jatuh Tempo!)</span>";
+                                                }
+                                            } elseif ($status == "Pending"  && $ambilreq['status'] != "KEM"){
+                                                $jatuhtempo = FALSE;
+                                                echo "<span style='color: gray; font-weight: bold;'> (Menunggu persetujuan perpanjangan...)</span>";
+                                            } elseif ($status_sirkul == "KEM"){
+                                                $jatuhtempo = FALSE;
+                                                $bukukembali = TRUE;
+                                            }
                                         }
                                     ?>
                                 </td>
