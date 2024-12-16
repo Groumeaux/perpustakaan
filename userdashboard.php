@@ -16,14 +16,21 @@ if (isset($_GET['edit'])){
 		$data_nama = $_SESSION["ses_nama"];
 	}
 
-$ambiluser = mysqli_query($koneksi, "SELECT * FROM tb_anggota WHERE id_anggota = '$data_id_anggota'");
-$userinfo = mysqli_fetch_array($ambiluser);
-if ($userinfo['profile_image'] == "" || $userinfo['profile_image'] == NULL ){
-	$profil = "https://via.placeholder.com/150";
-} else {
-	$profil = "images/profiles/".$userinfo['profile_image'];
+	$ambiluser = mysqli_query($koneksi, "SELECT * FROM tb_anggota WHERE id_anggota = '$data_id_anggota'");
+	$userinfo = mysqli_fetch_array($ambiluser);
+	if ($userinfo['profile_image'] == "" || $userinfo['profile_image'] == NULL ){
+		$profil = "https://via.placeholder.com/150";
+	} else {
+		$profil = "images/profiles/".$userinfo["profile_image"];
+	}
 }
-}
+	$ambiluser = mysqli_query($koneksi, "SELECT * FROM tb_anggota WHERE id_anggota = '$data_id_anggota'");
+	$userinfo = mysqli_fetch_array($ambiluser);
+	if ($userinfo['profile_image'] == "" || $userinfo['profile_image'] == NULL ){
+		$profil = "https://via.placeholder.com/150";
+	} else {
+		$profil = "images/profiles/".$userinfo["profile_image"];
+	}
 ?>
 
 <!DOCTYPE html>
@@ -109,12 +116,12 @@ if ($userinfo['profile_image'] == "" || $userinfo['profile_image'] == NULL ){
 			<!-- sidebar: style can be found in sidebar.less -->
 			<section class="sidebar">
 				<!-- Sidebar user panel -->
-				</b>
+				</br>
 				<div class="user-panel">
 					<div class="pull-left image">
-						<img src="dist/img/avatar.png" class="img-circle" alt="User Image">
+						<img src="<?php echo $profil; ?>" class="img-circle img-responsive center-block" alt="User Image" style="object-fit:cover !important;width:60px;height:45px;margin-left:10px;">
 					</div>
-					<div class="pull-left info">
+					<div class="pull-left info" style="margin-left:10px;">
 						<p>
 							<?php echo $data_nama; ?>
 						</p>
