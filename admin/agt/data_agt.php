@@ -30,7 +30,7 @@
 							<th>Id Anggota</th>
 							<th>Nama</th>
 							<th>JK</th>
-							<th>Kelas</th>
+							<th>Domisili</th>
 							<th>No HP</th>
 							<th>Kelola</th>
 						</tr>
